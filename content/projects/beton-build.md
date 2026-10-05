@@ -7,7 +7,7 @@ status: concept
 platform: "Код"
 cover: "/portfolio/p20_building.jpg"
 link: "https://concept-alexwebstudio-building.netlify.app"
-featured: true
+featured: false
 order: 8
 task: ""
 result: ""
