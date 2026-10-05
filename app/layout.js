@@ -3,6 +3,7 @@ import { bodyFont, headingFont, logoFont, monoFont } from './fonts';
 import SmoothScroll from '@/components/SmoothScroll';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import YandexMetrika from '@/components/YandexMetrika';
 import settings from '@/content/settings.json';
 
 export const metadata = {
@@ -55,6 +56,8 @@ export default function RootLayout({ children }) {
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <YandexMetrika />
+        <noscript><div><img src="https://mc.yandex.ru/watch/113426490" style={{ position: 'absolute', left: '-9999px' }} alt="" /></div></noscript>
       </body>
     </html>
   );
