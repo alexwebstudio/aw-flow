@@ -1,7 +1,10 @@
 'use client';
 /* Квиз «Обсудить проект»: шаги слева, живое превью заявки справа.
-   Ответы сохраняются в sessionStorage, можно вернуться и изменить. */
-import { useEffect, useRef, useState } from 'react';
+   Ответы сохраняются в sessionStorage, можно вернуться и изменить.
+   Первый шаг — направление (компактный список), дальше шаги зависят от выбора:
+   для сайтов — формат/что есть, для доработки и SEO — свои вопросы. Финал
+   (контакты и отправка) общий для всех. */
+import { useEffect, useMemo, useRef, useState } from 'react';
 import gsap from 'gsap';
 import quiz from '@/content/quiz.json';
 import settings from '@/content/settings.json';
@@ -11,20 +14,52 @@ import { ContactFields, LeadFallback, LeadSuccess } from './LeadParts';
 import { IconArrow, IconChevron, socialList } from './Icons';
 
 const KEY = 'aws-brief';
-const INIT = { type: '', format: '', assets: [], timing: '', budget: '', about: '', examples: '', name: '', kind: 'telegram', contact: '', trap: '' };
+const INIT = {
+  cat: '', type: '', format: '', assets: [], revWhat: [], base: '',
+  timing: '', budget: '', about: '', examples: '', name: '', kind: 'telegram', contact: '', trap: '',
+};
 
-const STEPS = [
-  { key: 'type', label: 'Тип сайта', title: 'Какой сайт вам нужен?', sub: 'Выберите вариант — его можно поменять в любой момент.', input: 'radio', options: quiz.types, required: true },
-  { key: 'format', label: 'Формат', title: 'Как сделать сайт?', sub: 'Если не уверены — выберите «Не знаю», подскажу.', input: 'radio', options: quiz.formats, required: true },
-  { key: 'assets', label: 'Что уже есть', title: 'Что у вас уже есть?', sub: 'Можно выбрать несколько вариантов или пропустить шаг.', input: 'checkbox', options: quiz.assets.map(v => ({ v })) },
-  { key: 'timing', label: 'Сроки', title: 'Когда нужен сайт?', sub: 'Это поможет спланировать работу.', input: 'radio', options: quiz.timing.map(v => ({ v })), required: true },
-  { key: 'budget', label: 'Бюджет', title: 'Какой бюджет рассматриваете?', sub: 'Ориентир поможет предложить подходящий формат.', input: 'radio', options: quiz.budgets.map(v => ({ v })), required: true },
-  { key: 'about', label: 'О проекте', title: 'Коротко о проекте', sub: 'Чем занимаетесь и какая задача у сайта. Шаг можно пропустить.', input: 'text' },
-  { key: 'contacts', label: 'Контакты', title: 'Куда прислать ответ?', sub: 'Отвечаю в течение нескольких часов.', input: 'contacts', required: true },
-];
+/* ключ категории по её названию */
+const CAT_KEY = Object.fromEntries(quiz.cats.map(c => [c.v, c.key]));
+
+/* предвыбор из ?type=<услуга>: сопоставляем услугу с категорией квиза */
+const SITE_TYPES = new Set(quiz.siteTypes.map(t => t.v));
+const TYPE_TO_STATE = {
+  'Разработка SaaS-проекта': { cat: 'SaaS-проект' },
+  'Доработка существующего сайта': { cat: 'Доработка существующего сайта' },
+  'Базовая SEO-оптимизация сайта': { cat: 'SEO-оптимизация' },
+};
+quiz.siteTypes.forEach(t => { TYPE_TO_STATE[t.v] = { cat: 'Сайт под ключ', type: t.v }; });
+
+/* определения шагов */
+const S = {
+  cat: { key: 'cat', label: 'Направление', title: 'Что вам нужно?', sub: 'Выберите направление — его можно поменять в любой момент.', input: 'radio', options: quiz.cats, required: true, list: true },
+  type: { key: 'type', label: 'Тип сайта', title: 'Какой сайт нужен?', sub: 'Выберите формат — внутри можно изменить.', input: 'radio', options: quiz.siteTypes, required: true },
+  format: { key: 'format', label: 'Формат', title: 'Как сделать сайт?', sub: 'Если не уверены — выберите «Не знаю», подскажу.', input: 'radio', options: quiz.formats, required: true },
+  assets: { key: 'assets', label: 'Что уже есть', title: 'Что у вас уже есть?', sub: 'Можно выбрать несколько вариантов или пропустить шаг.', input: 'checkbox', options: quiz.assets.map(v => ({ v })) },
+  revWhat: { key: 'revWhat', label: 'Что доработать', title: 'Что нужно доработать?', sub: 'Выберите, что ближе к задаче — можно несколько.', input: 'checkbox', options: quiz.revWhat.map(v => ({ v })) },
+  base: { key: 'base', label: 'Сайт на', title: 'На чём сделан сайт?', sub: 'Если не знаете — выберите «Другое / не знаю».', input: 'radio', options: quiz.siteBase.map(v => ({ v })), required: true },
+  timing: { key: 'timing', label: 'Сроки', title: 'Когда нужен результат?', sub: 'Это поможет спланировать работу.', input: 'radio', options: quiz.timing.map(v => ({ v })), required: true },
+  budget: { key: 'budget', label: 'Бюджет', title: 'Какой бюджет рассматриваете?', sub: 'Ориентир поможет предложить подходящий формат.', input: 'radio', options: quiz.budgets.map(v => ({ v })), required: true },
+  about: { key: 'about', label: 'О проекте', title: 'Коротко о проекте', sub: 'Чем занимаетесь и какая задача у проекта. Шаг можно пропустить.', input: 'text' },
+  contacts: { key: 'contacts', label: 'Контакты', title: 'Куда прислать ответ?', sub: 'Отвечаю в течение нескольких часов.', input: 'contacts', required: true },
+};
+
+/* набор шагов зависит от выбранной категории; финал (about → contacts) общий */
+function buildSteps(cat) {
+  const key = CAT_KEY[cat];
+  const tail = [S.timing, S.budget, S.about, S.contacts];
+  if (key === 'site') return [S.cat, S.type, S.format, S.assets, ...tail];
+  if (key === 'saas') return [S.cat, S.assets, ...tail];
+  if (key === 'revision') return [S.cat, S.revWhat, S.base, ...tail];
+  if (key === 'seo') return [S.cat, S.base, ...tail];
+  if (key === 'other') return [S.cat, S.format, S.assets, ...tail];
+  return [S.cat, S.format, S.assets, ...tail]; // пока категория не выбрана — ориентировочный счётчик
+}
 
 function display(a, key) {
   if (key === 'assets') return a.assets.join(', ');
+  if (key === 'revWhat') return a.revWhat.join(', ');
   if (key === 'about') return [a.about, a.examples && `Примеры: ${a.examples}`].filter(Boolean).join(' · ');
   if (key === 'contacts') return [a.name, a.contact && `${CONTACT_KINDS[a.kind].label}: ${a.contact}`].filter(Boolean).join(' · ');
   return a[key];
@@ -45,14 +80,21 @@ export default function Quiz() {
   const userNav = useRef(false);
   const cardRef = useRef(null);
 
-  /* восстановление ответов и предвыбор типа из ?type= */
+  /* шаги пересобираются при смене направления */
+  const STEPS = useMemo(() => buildSteps(a.cat), [a.cat]);
+
+  /* если число шагов уменьшилось (сменили направление) — не выходим за пределы */
+  useEffect(() => { setStep(s => Math.min(s, STEPS.length - 1)); }, [STEPS.length]);
+
+  /* восстановление ответов и предвыбор направления из ?type= */
   useEffect(() => {
     const saved = session.get(KEY);
     let next = saved?.a ? { ...INIT, ...saved.a, trap: '' } : INIT;
+    if (next.type && !next.cat && TYPE_TO_STATE[next.type]) next = { ...next, ...TYPE_TO_STATE[next.type] };
     const t = new URLSearchParams(location.search).get('type');
-    if (t && quiz.types.some(x => x.v === t)) next = { ...next, type: t };
+    if (t && TYPE_TO_STATE[t]) next = { ...next, ...TYPE_TO_STATE[t] };
     setA(next);
-    if (saved && typeof saved.step === 'number') setStep(Math.min(saved.step, STEPS.length - 1));
+    if (saved && typeof saved.step === 'number') setStep(Math.min(saved.step, buildSteps(next.cat).length - 1));
     setLoaded(true);
   }, []);
 
@@ -68,20 +110,27 @@ export default function Quiz() {
   }, [step, loaded]);
 
   const update = (key, value, previewKey = key) => {
-    setA(v => ({ ...v, [key]: value }));
+    setA(v => {
+      const next = { ...v, [key]: value };
+      // смена направления обнуляет ответы предыдущей ветки, чтобы в заявку не попало лишнее
+      if (key === 'cat') { next.type = ''; next.format = ''; next.assets = []; next.revWhat = []; next.base = ''; }
+      return next;
+    });
     setError('');
     setFlash(previewKey);
     setTimeout(() => setFlash(f => (f === previewKey ? '' : f)), 700);
   };
 
-  const toggleAsset = v => {
-    let list = a.assets.includes(v) ? a.assets.filter(x => x !== v) : [...a.assets, v];
-    if (v === 'Пока ничего' && list.includes(v)) list = [v];
-    else list = list.filter(x => x !== 'Пока ничего' || v === 'Пока ничего');
-    update('assets', list);
+  const toggleMulti = (key, v) => {
+    let list = a[key].includes(v) ? a[key].filter(x => x !== v) : [...a[key], v];
+    if (key === 'assets') {
+      if (v === 'Пока ничего' && list.includes(v)) list = [v];
+      else list = list.filter(x => x !== 'Пока ничего' || v === 'Пока ничего');
+    }
+    update(key, list);
   };
 
-  const cur = STEPS[step];
+  const cur = STEPS[step] || STEPS[STEPS.length - 1];
 
   const validate = () => {
     if (cur.input === 'contacts') {
@@ -103,10 +152,19 @@ export default function Quiz() {
     if (cardRef.current && cardRef.current.getBoundingClientRect().top < 0) scrollToTarget(cardRef.current);
   };
 
-  const rows = () => [
-    ['Тип сайта', a.type], ['Формат', a.format], ['Что уже есть', a.assets.join(', ')], ['Сроки', a.timing], ['Бюджет', a.budget],
-    ['О проекте', a.about.trim()], ['Примеры', a.examples.trim()], ['Имя', a.name.trim()], [CONTACT_KINDS[a.kind].label, a.contact.trim()],
-  ];
+  const rows = () => {
+    const r = [['Направление', a.cat]];
+    if (a.type) r.push(['Тип сайта', a.type]);
+    if (a.format) r.push(['Формат', a.format]);
+    if (a.assets.length) r.push(['Что уже есть', a.assets.join(', ')]);
+    if (a.revWhat.length) r.push(['Что доработать', a.revWhat.join(', ')]);
+    if (a.base) r.push(['Сайт сделан', a.base]);
+    r.push(['Сроки', a.timing], ['Бюджет', a.budget]);
+    if (a.about.trim()) r.push(['О проекте', a.about.trim()]);
+    if (a.examples.trim()) r.push(['Примеры', a.examples.trim()]);
+    r.push(['Имя', a.name.trim()], [CONTACT_KINDS[a.kind].label, a.contact.trim()]);
+    return r;
+  };
 
   const next = async e => {
     e.preventDefault();
@@ -145,13 +203,13 @@ export default function Quiz() {
                 <p className="q-sub">{cur.sub}</p>
 
                 {(cur.input === 'radio' || cur.input === 'checkbox') && (
-                  <div className="q-opts">
+                  <div className={`q-opts${cur.list ? ' q-opts-list' : ''}`}>
                     {cur.options.map(o => {
-                      const checked = cur.input === 'radio' ? a[cur.key] === o.v : a.assets.includes(o.v);
+                      const checked = cur.input === 'radio' ? a[cur.key] === o.v : a[cur.key].includes(o.v);
                       return (
                         <label key={o.v} className="q-opt">
                           <input type={cur.input} name={cur.key} value={o.v} checked={checked}
-                            onChange={() => (cur.input === 'radio' ? update(cur.key, o.v) : toggleAsset(o.v))} />
+                            onChange={() => (cur.input === 'radio' ? update(cur.key, o.v) : toggleMulti(cur.key, o.v))} />
                           <span className="box"><span className="mark" aria-hidden="true" /><span><span className="t">{o.v}</span>{o.d && <span className="d">{o.d}</span>}</span></span>
                         </label>
                       );

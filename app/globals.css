@@ -371,6 +371,7 @@ html.no-preload .pl{display:none}
 .svc-facts div{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--line)}
 .svc-facts dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
 .svc-facts dd{font-family:var(--f-head);font-size:18px;letter-spacing:-.02em}
+.svc-price-note{margin-top:14px;font-size:13px;line-height:1.5;color:var(--mute)}
 .svc-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px)}
 .svc-col h2{margin-bottom:14px}
 .svc-col p{color:var(--fg-2);font-size:16px;line-height:1.7;max-width:52ch}
@@ -515,6 +516,7 @@ html.no-preload .pl{display:none}
 .q-title{font-family:var(--f-head);font-weight:400;font-size:clamp(24px,2.6vw,36px);letter-spacing:-.04em;line-height:1.08;margin-bottom:10px;padding:0}
 .q-sub{color:var(--mute);margin-bottom:clamp(22px,2.6vw,30px);font-size:15px}
 .q-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.q-opts.q-opts-list{grid-template-columns:1fr}
 .q-opt{position:relative;display:block;cursor:pointer}
 .q-opt input{position:absolute;opacity:0;pointer-events:none}
 .q-opt .box{display:flex;align-items:flex-start;gap:14px;min-height:66px;padding:15px 18px;border:1px solid var(--line-2);border-radius:var(--r-s);transition:border-color .3s,background .3s}

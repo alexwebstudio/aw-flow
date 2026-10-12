@@ -2,7 +2,7 @@ import { getProducts, getProjects, getServices, getSettings } from '@/lib/conten
 
 export default function sitemap() {
   const base = getSettings().siteUrl;
-  const pages = ['', '/portfolio', '/about', '/reviews', '/join', '/brief'].map(p => ({
+  const pages = ['', '/services', '/portfolio', '/about', '/reviews', '/join', '/brief'].map(p => ({
     url: base + p, changeFrequency: 'monthly', priority: p === '' ? 1 : 0.8,
   }));
   const legal = [{ url: `${base}/privacy`, changeFrequency: 'yearly', priority: 0.2 }];

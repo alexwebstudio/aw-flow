@@ -34,7 +34,7 @@ export default function Footer() {
         <nav className="f-nav" aria-label="Разделы сайта">
           <Link href="/portfolio">Портфолио</Link>
           <Link href="/#useful">Полезные работы</Link>
-          <Link href="/#types">Услуги</Link>
+          <Link href="/services">Услуги</Link>
           <Link href="/about#process">Этапы</Link>
           <Link href="/about#principles">Принципы</Link>
           <Link href="/about#advantages">Преимущества</Link>

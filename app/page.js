@@ -78,7 +78,10 @@ export default function HomePage() {
             <div>
               <Heading id="typesTitle" className="h2" text="Какой сайт *нужен* вам?" />
             </div>
-            <Reveal className="s-side"><p>Выберите формат под задачу: в карточке — что входит и сроки. Если сомневаетесь, квиз поможет определиться.</p></Reveal>
+            <Reveal className="s-side">
+              <p>Выберите формат под задачу: в карточке — что входит и сроки. Если сомневаетесь, квиз поможет определиться.</p>
+              <Link className="link-u" href="/services">Все услуги <IconArrow /></Link>
+            </Reveal>
           </div>
           <Services />
         </div>

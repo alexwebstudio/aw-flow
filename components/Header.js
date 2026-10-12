@@ -10,6 +10,7 @@ import { socialList } from './Icons';
 
 const NAV = [
   { href: '/', label: 'Главная' },
+  { href: '/services', label: 'Услуги' },
   { href: '/portfolio', label: 'Портфолио' },
   { href: '/about', label: 'Обо мне' },
   { href: '/reviews', label: 'Отзывы' },

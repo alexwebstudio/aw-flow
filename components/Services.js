@@ -5,10 +5,13 @@ import Reveal from './Reveal';
 import { IconArrow } from './Icons';
 import { priceFrom } from '@/lib/price';
 
+/* На главной — только наиболее востребованные услуги (home: true).
+   Полный список всех направлений — на отдельной странице /services. */
 export default function Services() {
+  const featured = services.filter(s => s.home);
   return (
     <Reveal stagger className="svc-grid">
-      {services.map((s, i) => {
+      {featured.map((s, i) => {
         const pf = priceFrom(s);
         return (
         <Link key={s.id} className="svc" href={`/services/${s.slug}`}>
