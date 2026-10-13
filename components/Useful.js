@@ -3,12 +3,15 @@
 import Link from 'next/link';
 import products from '@/content/products.json';
 import Reveal from './Reveal';
+import CardTilt from './CardTilt';
 import { IconArrow } from './Icons';
 
 const ORDER = ['maruno', 'soon'];
 
 export default function Useful() {
   return (
+    <>
+    <CardTilt selector=".prod" />
     <Reveal stagger className="prod-grid">
       {ORDER.map(key => {
         const p = products[key];
@@ -31,5 +34,6 @@ export default function Useful() {
         );
       })}
     </Reveal>
+    </>
   );
 }

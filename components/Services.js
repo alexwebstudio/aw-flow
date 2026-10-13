@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import services from '@/content/services.json';
 import Reveal from './Reveal';
+import CardTilt from './CardTilt';
 import { IconArrow } from './Icons';
 import { priceFrom } from '@/lib/price';
 
@@ -10,6 +11,8 @@ import { priceFrom } from '@/lib/price';
 export default function Services() {
   const featured = services.filter(s => s.home);
   return (
+    <>
+    <CardTilt />
     <Reveal stagger className="svc-grid">
       {featured.map((s, i) => {
         const pf = priceFrom(s);
@@ -35,5 +38,6 @@ export default function Services() {
         </span>
       </Link>
     </Reveal>
+    </>
   );
 }

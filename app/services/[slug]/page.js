@@ -4,6 +4,7 @@ import Heading from '@/components/Heading';
 import Reveal from '@/components/Reveal';
 import CtaBand from '@/components/CtaBand';
 import WorkCard, { projectSub } from '@/components/WorkCard';
+import CardTilt from '@/components/CardTilt';
 import { IconArrow } from '@/components/Icons';
 import about from '@/content/about.json';
 import { getService, getServices, getProduct, getProjectsByKinds, toCard, getSettings } from '@/lib/content';
@@ -120,6 +121,7 @@ export default async function ServicePage({ params }) {
               <Heading className="h2" text="Подходящие *работы*" />
               <Reveal className="s-side"><Link className="link-u" href="/portfolio">Всё портфолио <IconArrow /></Link></Reveal>
             </div>
+            {product && <CardTilt selector=".prod" />}
             {product && (
               <Reveal className="prod-grid" style={{ marginBottom: related.length > 0 ? 'clamp(20px,3vw,32px)' : 0 }}>
                 <Link href={`/products/${product.slug}`} className="prod">

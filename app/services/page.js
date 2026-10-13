@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Heading from '@/components/Heading';
 import Reveal from '@/components/Reveal';
 import CtaBand from '@/components/CtaBand';
+import CardTilt from '@/components/CardTilt';
 import { IconArrow } from '@/components/Icons';
 import { getServices, getSettings } from '@/lib/content';
 import { priceFrom } from '@/lib/price';
@@ -64,6 +65,7 @@ export default function ServicesPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(crumbsLd)} />
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(itemListLd)} />
+      <CardTilt />
 
       <section className="page-hero has-wm">
         <span className="wm" aria-hidden="true">Услуги</span>
