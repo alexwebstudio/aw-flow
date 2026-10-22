@@ -30,10 +30,10 @@ export default function Hero() {
     <section ref={root} className="hero" id="hero" aria-labelledby="heroTitle">
       <div className="hero-glow" aria-hidden="true" />
       <div className="wrap hero-inner">
-        <p className="eyebrow" data-hf>Создаю digital-продукты</p>
+        <p className="eyebrow" data-hf>Веб-студия · Караганда, Казахстан</p>
         <Heading as="h1" id="heroTitle" className="h-hero" manual delay={0.1}
-          text="Сайт как инструмент,|который *приводит клиентов*" />
-        <p className="lede" data-hf>Проектирую сайты для бизнеса в России и Казахстане — не просто красивые, а работающие на результат: они объясняют ценность, вызывают доверие и превращают посетителей в заявки.</p>
+          text="Разработка сайтов,|которые *приводят клиентов*" />
+        <p className="lede" data-hf>Разрабатываю сайты для бизнеса в Казахстане и России — не просто красивые, а работающие на результат: они объясняют ценность, вызывают доверие и превращают посетителей в заявки.</p>
         <div className="cta" data-hf>
           <a className="btn btn-primary" href="#work">Смотреть работы</a>
           <Link className="btn btn-ghost" href="/brief">Обсудить проект <IconArrow /></Link>

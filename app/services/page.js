@@ -9,8 +9,8 @@ import { priceFrom } from '@/lib/price';
 import { breadcrumbsLd, jsonLdScript, og } from '@/lib/seo';
 
 export const metadata = {
-  title: 'Услуги — создание и доработка сайтов',
-  description: 'Все услуги alexwebstudio: лендинг, многостраничный и корпоративный сайт, интернет-магазин, сайт-визитка, пригласительное, SaaS-проект, доработка сайта и базовое SEO. На коде или Tilda, для бизнеса в России и Казахстане.',
+  title: 'Разработка сайтов — услуги и цены',
+  description: 'Разработка сайтов в Казахстане и России: лендинг, многостраничный и корпоративный сайт, интернет-магазин, сайт-визитка, пригласительное, SaaS-проект, доработка сайта и базовое SEO. На коде или Tilda.',
   alternates: { canonical: '/services' },
   openGraph: og('/services'),
   robots: { index: true, follow: true },
@@ -70,7 +70,7 @@ export default function ServicesPage() {
       <section className="page-hero has-wm">
         <span className="wm" aria-hidden="true">Услуги</span>
         <div className="wrap">
-          <Heading as="h1" className="h-hero" manual text="Услуги: сайты *под задачу бизнеса*" />
+          <Heading as="h1" className="h-hero" manual text="Разработка сайтов *под задачу бизнеса*" />
           <Reveal as="p" className="lede">Делаю сайты на коде и на Tilda для бизнеса в России и Казахстане — от одностраничного лендинга до корпоративного сайта и интернет-магазина. Отдельно беру доработку готового сайта, базовую SEO-подготовку и разработку SaaS-проектов. Выберите направление — внутри подробно, что входит и сроки.</Reveal>
           <Reveal className="svc-hero-cta">
             <Link className="btn btn-primary" href="/brief">Подобрать в квизе <IconArrow /></Link>
