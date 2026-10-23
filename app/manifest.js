@@ -9,7 +9,9 @@ export default function manifest() {
     theme_color: '#050507',
     lang: 'ru',
     icons: [
-      { src: '/images/favicon.svg', type: 'image/svg+xml', sizes: 'any', purpose: 'any' },
+      { src: '/icons/favicon-192.png', type: 'image/png', sizes: '192x192', purpose: 'any' },
+      { src: '/icons/favicon-512.png', type: 'image/png', sizes: '512x512', purpose: 'any' },
+      { src: '/icons/icon-maskable-512.png', type: 'image/png', sizes: '512x512', purpose: 'maskable' },
     ],
   };
 }

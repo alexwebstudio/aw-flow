@@ -20,7 +20,15 @@ export const metadata = {
     images: [{ url: '/images/preview.jpg', width: 1200, height: 1200, alt: 'AlexWebStudio — разработка сайтов' }],
   },
   twitter: { card: 'summary_large_image', images: ['/images/preview.jpg'] },
-  icons: { icon: '/images/favicon.svg', apple: '/images/preview.jpg' },
+  icons: {
+    icon: [
+      { url: '/icons/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icons/favicon-48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/icons/favicon-192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/icons/apple-touch-icon.png',
+  },
   verification: { google: 'qtXbQVBaCC6v8RDU9ZV0k3fUgVZHvfCc2bzX7riVO_w' },
   robots: {
     index: true, follow: true,
