@@ -7,8 +7,8 @@ status: concept
 platform: "Код"
 cover: "/portfolio/p23-barbershop.jpg"
 link: "https://concept-alexwebstudio-barbershop.netlify.app"
-featured: true
-order: 4
+featured: false
+order: 7
 task: ""
 result: ""
 features:

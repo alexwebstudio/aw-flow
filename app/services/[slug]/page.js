@@ -78,7 +78,7 @@ export default async function ServicePage({ params }) {
                 {priceRows(s).map(r => <div key={r.label}><dt>{r.label}</dt><dd>{r.value}</dd></div>)}
                 <div><dt>Срок</dt><dd>{s.term}</dd></div>
               </Reveal>
-              {s.price && <Reveal as="p" className="svc-price-note">Цены примерные — точную стоимость называю после обсуждения задачи.</Reveal>}
+              {s.usd && <Reveal as="p" className="svc-price-note">Цены примерные — точную стоимость называю после обсуждения задачи.</Reveal>}
             </div>
           </div>
         </div>
@@ -98,6 +98,28 @@ export default async function ServicePage({ params }) {
           </Reveal>
         </div>
       </section>
+
+      {s.pick && (
+        <section className="section-tight">
+          <div className="wrap">
+            <Heading className="h2" text="На *Тильде* или на коде?" />
+            <Reveal className="pick-grid">
+              {s.pick.code && (
+                <div className="pick-card">
+                  <span className="pick-tag">Код</span>
+                  <p>{s.pick.code}</p>
+                </div>
+              )}
+              {s.pick.tilda && (
+                <div className="pick-card">
+                  <span className="pick-tag">Tilda</span>
+                  <p>{s.pick.tilda}</p>
+                </div>
+              )}
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       <section className="section-tight band">
         <div className="wrap">

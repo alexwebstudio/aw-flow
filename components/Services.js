@@ -22,7 +22,7 @@ export default function Services() {
           <span className="svc-title">{s.title}</span>
           <span className="svc-fit">{s.lead}</span>
           <span className="svc-foot">
-            <span className="svc-price">{pf.rub}<span>{pf.kzt} · {s.term}</span></span>
+            <span className="svc-price">{pf.main}<span>{pf.sub}</span></span>
             <span className="svc-more" aria-hidden="true"><IconArrow /></span>
           </span>
         </Link>
