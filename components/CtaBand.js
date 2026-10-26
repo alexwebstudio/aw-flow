@@ -1,16 +1,18 @@
-import Link from 'next/link';
 import Heading from './Heading';
 import Reveal from './Reveal';
-import { IconArrow } from './Icons';
+import OrderLink from './OrderLink';
+import { IconArrowUp } from './Icons';
+import { ORDER_TEXT } from '@/lib/contact';
 
-export default function CtaBand({ title, text }) {
+/* Призыв в конце страниц: Telegram студии с готовым сообщением (text). */
+export default function CtaBand({ title, text, message = ORDER_TEXT, label = 'Написать в Telegram' }) {
   return (
     <Reveal className="cta-band">
       <div>
         <Heading className="h2" text={title} />
         <p>{text}</p>
       </div>
-      <Link className="btn btn-primary" href="/brief">Обсудить проект <IconArrow /></Link>
+      <OrderLink text={message}>{label} <IconArrowUp /></OrderLink>
     </Reveal>
   );
 }

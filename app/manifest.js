@@ -1,17 +1,13 @@
 export default function manifest() {
   return {
-    name: 'AlexWebStudio',
-    short_name: 'alexwebstudio',
-    description: 'Веб-студия: сайты для бизнеса в России и Казахстане.',
+    name: 'AW-Flow',
+    short_name: 'AW-Flow',
+    description: 'Библиотека готовых эффектов и анимаций для сайтов на Tilda и на коде.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#050507',
-    theme_color: '#050507',
+    background_color: '#ffffff',
+    theme_color: '#ffffff',
     lang: 'ru',
-    icons: [
-      { src: '/icons/favicon-192.png', type: 'image/png', sizes: '192x192', purpose: 'any' },
-      { src: '/icons/favicon-512.png', type: 'image/png', sizes: '512x512', purpose: 'any' },
-      { src: '/icons/icon-maskable-512.png', type: 'image/png', sizes: '512x512', purpose: 'maskable' },
-    ],
+    icons: [{ src: '/icon.svg', type: 'image/svg+xml', sizes: 'any', purpose: 'any' }],
   };
 }

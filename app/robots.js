@@ -1,9 +1,8 @@
-import { getSettings } from '@/lib/content';
+import settings from '@/content/settings.json';
 
 export default function robots() {
-  const base = getSettings().siteUrl;
   return {
-    rules: [{ userAgent: '*', allow: '/', disallow: '/api/' }],
-    sitemap: `${base}/sitemap.xml`,
+    rules: [{ userAgent: '*', allow: '/' }],
+    sitemap: `${settings.siteUrl}/sitemap.xml`,
   };
 }

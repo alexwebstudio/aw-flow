@@ -1,5 +1,6 @@
 'use client';
-/* Заголовок с мягким появлением: слова проявляются из размытия.
+/* Заголовок с мягким появлением: слова поднимаются и проявляются из прозрачности.
+   Анимируются только transform и opacity — blur на десятках слов слишком дорог для GPU.
    text: «Какой сайт *нужен* вам?» — *…* выделяет акцент, | переносит строку.
    manual — появление по готовности страницы (после прелоадера), а не по скроллу.
    after — узел в конце последней строки (например, сменяющееся слово в hero). */
@@ -35,8 +36,8 @@ export default function Heading({ as: Tag = 'h2', text, className = '', id, manu
     const el = ref.current;
     if (prefersReduced()) { el.classList.add('hx-in'); return; }
     const words = el.querySelectorAll('.hw');
-    const from = { opacity: 0, filter: 'blur(12px)', y: 18 };
-    const to = { opacity: 1, filter: 'blur(0px)', y: 0, duration: 0.9, ease: 'power2.out', stagger: 0.06, delay };
+    const from = { opacity: 0, y: 18, force3D: true };
+    const to = { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.05, delay, force3D: true };
     const ctx = gsap.context(() => {
       gsap.set(words, from);
       el.classList.add('hx-in');

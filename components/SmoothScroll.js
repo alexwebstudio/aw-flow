@@ -24,7 +24,8 @@ export default function SmoothScroll() {
     }
     const ctx = gsap.context(() => {
       gsap.to('.prog', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: document.documentElement, start: 'top top', end: 'bottom bottom', scrub: true } });
-      if (!prefersReduced()) gsap.to('.glow-bg', { yPercent: 30, ease: 'none', scrollTrigger: { trigger: document.documentElement, start: 'top top', end: 'bottom bottom', scrub: true } });
+      /* параллакс фонового свечения — только на десктопе: на мобильных это лишний слой на каждый кадр скролла */
+      if (!prefersReduced() && window.matchMedia('(min-width: 761px)').matches) gsap.to('.glow-bg', { yPercent: 30, ease: 'none', scrollTrigger: { trigger: document.documentElement, start: 'top top', end: 'bottom bottom', scrub: true } });
     });
 
     /* якоря на текущей странице — плавно, с учётом высоты шапки */
@@ -42,8 +43,9 @@ export default function SmoothScroll() {
     };
     document.addEventListener('click', onClick);
 
-    /* страховка: любые «нативные» прокрутки (полоса прокрутки, End, поиск по странице) */
-    const update = () => ScrollTrigger.update();
+    /* страховка: «нативные» прокрутки без Lenis (полоса прокрутки, End, поиск по странице).
+       При активном Lenis триггеры и так обновляются из lenis.on('scroll') — второй раз не считаем */
+    const update = () => { if (!lenis) ScrollTrigger.update(); };
     window.addEventListener('scroll', update, { passive: true });
     const refresh = () => ScrollTrigger.refresh();
     window.addEventListener('load', refresh);

@@ -8,7 +8,7 @@ import { prefersReduced } from '@/lib/client';
 
 if (typeof window !== 'undefined') gsap.registerPlugin(ScrollTrigger);
 
-export default function Reveal({ as: Tag = 'div', stagger = false, delay = 0, y = 24, blur = false, className, children, ...rest }) {
+export default function Reveal({ as: Tag = 'div', stagger = false, delay = 0, y = 24, className, children, ...rest }) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -24,15 +24,16 @@ export default function Reveal({ as: Tag = 'div', stagger = false, delay = 0, y 
           onEnter: batch => gsap.to(batch, { y: 0, opacity: 1, duration: 0.85, ease: 'power3.out', stagger: 0.07, overwrite: true }),
         });
       } else {
-        const from = blur ? { y, opacity: 0, filter: 'blur(10px)' } : { y, opacity: 0 };
-        const to = blur ? { y: 0, opacity: 1, filter: 'blur(0px)' } : { y: 0, opacity: 1 };
+        // только transform и opacity: blur при появлении блоков слишком дорог
+        const from = { y, opacity: 0, force3D: true };
+        const to = { y: 0, opacity: 1, force3D: true };
         gsap.set(el, from);
         el.classList.add('rv-in');
         gsap.to(el, { ...to, duration: 0.9, delay, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true } });
       }
     }, el);
     return () => { ctx.revert(); el.classList.remove('rv-in'); };
-  }, [stagger, delay, y, blur]);
+  }, [stagger, delay, y]);
 
   return <Tag ref={ref} data-reveal="" className={className} {...rest}>{children}</Tag>;
 }

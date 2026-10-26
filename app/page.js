@@ -1,103 +1,91 @@
 import Link from 'next/link';
-import Preloader from '@/components/Preloader';
-import Hero from '@/components/Hero';
 import Heading from '@/components/Heading';
 import Reveal from '@/components/Reveal';
-import Showcase from '@/components/Showcase';
-import Useful from '@/components/Useful';
-import Services from '@/components/Services';
-import Faq from '@/components/Faq';
+import CtaBand from '@/components/CtaBand';
+import FxFrame from '@/components/FxFrame';
+import AwFlowCatalog from '@/components/AwFlowCatalog';
 import { IconArrow } from '@/components/Icons';
-import { getProjects, getSettings, toCard } from '@/lib/content';
+import { defaultClass, fxDefaults, getEffect, getEffects, getFxCategories } from '@/lib/aw-flow';
 import { og } from '@/lib/seo';
+import { CUSTOM_TEXT } from '@/lib/contact';
 
-export const metadata = { alternates: { canonical: '/' }, openGraph: og('/') };
+export const metadata = {
+  alternates: { canonical: '/' },
+  openGraph: og('/'),
+};
+
+const HERO_FX = 'text-split';
+
+const STEPS = [
+  { t: 'Выберите эффект', d: 'Каталог разделён на текст, объекты, интерфейс и фон — у каждого эффекта живое превью.' },
+  { t: 'Настройте движение', d: 'Пресет или свои значения: длительность, задержка, смещение, плавность и отдельные настройки для телефонов.' },
+  { t: 'Назначьте класс', d: 'В Zero Block дайте нужному элементу CSS-класс эффекта — без точки.' },
+  { t: 'Вставьте код', d: 'Скопируйте готовый код в HTML-блок на той же странице и опубликуйте её.' },
+];
 
 export default function HomePage() {
-  const projects = getProjects();
-  const featured = projects.filter(p => p.featured).map(toCard);
-  const { siteUrl, contacts } = getSettings();
-
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
-    name: 'AlexWebStudio',
-    description: 'Веб-студия: разработка сайтов под ключ — лендинги, интернет-магазины, корпоративные сайты и пригласительные для бизнеса в России и Казахстане.',
-    url: siteUrl + '/',
-    image: siteUrl + '/images/preview.jpg',
-    priceRange: '$$',
-    areaServed: [{ '@type': 'Country', name: 'Kazakhstan' }, { '@type': 'Country', name: 'Russia' }],
-    address: { '@type': 'PostalAddress', addressLocality: 'Караганда', addressCountry: 'KZ' },
-    founder: { '@type': 'Person', name: 'Александр' },
-    sameAs: [contacts.telegram, contacts.whatsapp, contacts.instagram, contacts.tiktok].filter(Boolean),
-    contactPoint: { '@type': 'ContactPoint', contactType: 'sales', url: contacts.telegram },
-  };
+  const effects = getEffects();
+  const categories = getFxCategories();
+  const hero = getEffect(HERO_FX);
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
-      <Preloader />
-      <Hero />
-
-      {/* ПОРТФОЛИО */}
-      <section className="section has-wm" id="work" aria-labelledby="workTitle">
-        <span className="wm" aria-hidden="true">Работы</span>
-        <div className="wrap">
-          <div className="s-head">
-            <div>
-              <Heading id="workTitle" className="h2" text="Избранные *работы*" />
-            </div>
-            <Reveal className="s-side">
-              <p>Реальные проекты для заказчиков и концепты, в которых я показываю подход к разным нишам. Выберите работу — она откроется в крупной карточке.</p>
-              <Link className="link-u" href="/portfolio">Всё портфолио <IconArrow /></Link>
+      <section className="fxh" aria-labelledby="fxhTitle">
+        <div className="hero-grid fxh-grid" aria-hidden="true" />
+        <div className="wrap fxh-in">
+          <div className="fxh-copy">
+            <Reveal as="p" className="eyebrow fxh-eyebrow">Эффекты и анимации для Tilda</Reveal>
+            <Heading as="h1" id="fxhTitle" className="h2 fxh-title" manual delay={0.1} text="Крутите ползунки —|сайт *оживает*" />
+            <Reveal as="p" className="lede">Готовые визуальные эффекты и анимации для сайтов, в том числе на Tilda. Выберите эффект, настройте параметры и сразу посмотрите результат в живом превью.</Reveal>
+            <Reveal className="cta fxh-cta">
+              <a className="btn btn-primary" href="#catalog">Смотреть каталог <IconArrow /></a>
+              <a className="btn btn-ghost" href="#how">Как это работает</a>
             </Reveal>
           </div>
-          <Showcase projects={featured} />
+
+          <Reveal className="fx-stage fxh-stage" delay={0.2}>
+            <div className="fx-stage-bar">
+              <span className="fx-stage-meta">AW-Flow — {hero.name} · .{defaultClass(hero)}</span>
+              <Link className="fx-replay" href={`/effects/${hero.slug}`}>Настроить <IconArrow /></Link>
+            </div>
+            <div className="fx-stage-view">
+              <FxFrame fx={hero} values={fxDefaults(hero)} mode="card" href={`/effects/${hero.slug}`} zoom={0.86} defer={900} />
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* ПОЛЕЗНЫЕ РАБОТЫ */}
-      <section className="section has-wm" id="useful" aria-labelledby="usefulTitle">
-        <span className="wm" aria-hidden="true">Продукты</span>
+      <section className="section-tight fx-catalog" id="catalog">
         <div className="wrap">
           <div className="s-head">
-            <div>
-              <Heading id="usefulTitle" className="h2" text="Мои полезные *работы*" />
-            </div>
-            <Reveal className="s-side"><p>Инструменты, которые я сделал, чтобы задачу можно было решить самому — без заказа отдельного сайта.</p></Reveal>
+            <Heading className="h2" text="Каталог *эффектов*" />
+            <Reveal as="p" className="s-side">В каждой карточке — настоящий код эффекта в работе. Наведите, чтобы проиграть его заново, или откройте конструктор.</Reveal>
           </div>
-          <Useful />
+          <AwFlowCatalog effects={effects} categories={categories} />
         </div>
       </section>
 
-      {/* КАКОЙ САЙТ НУЖЕН */}
-      <section className="section has-wm" id="types" aria-labelledby="typesTitle">
-        <span className="wm" aria-hidden="true">Услуги</span>
+      <section className="section-tight fx-how" id="how">
         <div className="wrap">
           <div className="s-head">
-            <div>
-              <Heading id="typesTitle" className="h2" text="Какой сайт *нужен* вам?" />
-            </div>
-            <Reveal className="s-side">
-              <p>Выберите формат под задачу: в карточке — что входит и сроки. Если сомневаетесь, квиз поможет определиться.</p>
-              <Link className="link-u" href="/services">Все услуги <IconArrow /></Link>
-            </Reveal>
+            <Heading className="h2" text="Как это *работает*" />
+            <Reveal as="p" className="s-side">Четыре шага от выбора до эффекта на опубликованном сайте. Программировать ничего не нужно.</Reveal>
           </div>
-          <Services />
+          <Reveal stagger className="proc-row fx-steps">
+            {STEPS.map((s, i) => (
+              <div className="proc-step" key={s.t}>
+                <span className="proc-n">{String(i + 1).padStart(2, '0')}</span>
+                <h3>{s.t}</h3>
+                <p>{s.d}</p>
+              </div>
+            ))}
+          </Reveal>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="section" id="faq" aria-labelledby="faqTitle">
-        <div className="wrap faq-wrap">
-          <div className="faq-aside">
-            <Heading id="faqTitle" className="h2" text="Частые *вопросы*" />
-            <Reveal as="p">Не нашли ответа — оставьте заявку в квизе или напишите в Telegram.</Reveal>
-            <Reveal><Link className="btn btn-primary" href="/brief">Обсудить проект <IconArrow /></Link></Reveal>
-          </div>
-          <Faq />
-        </div>
-      </section>
+      <div className="wrap">
+        <CtaBand title="Нужен эффект, которого нет в *каталоге*?" text="Опишите идею — студия alexwebstudio соберёт анимацию под ваш сайт на Tilda или на коде." message={CUSTOM_TEXT} />
+      </div>
     </>
   );
 }
