@@ -49,7 +49,7 @@ export default function HomePage() {
               <Link className="fx-replay" href={`/effects/${hero.slug}`}>Настроить <IconArrow /></Link>
             </div>
             <div className="fx-stage-view">
-              <FxFrame fx={hero} values={fxDefaults(hero)} mode="card" href={`/effects/${hero.slug}`} zoom={0.86} defer={900} />
+              <FxFrame fx={hero} values={fxDefaults(hero)} mode="card" href={`/effects/${hero.slug}`} zoom={0.62} defer={900} />
             </div>
           </Reveal>
         </div>

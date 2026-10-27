@@ -24,7 +24,7 @@ export default function FxCard({ fx }) {
         </h3>
         <p className="fx-card-desc">{fx.short}</p>
         <div className="fx-card-foot">
-          <span className="fx-meta"><span>{triggerLabel(fxTrigger(fx))}</span><span>параметров: {fx.params.length}</span></span>
+          <span className="fx-meta"><span>{triggerLabel(fxTrigger(fx))}</span>{fx.lib === 'gsap' && <span>GSAP</span>}</span>
           <span className="fx-more" aria-hidden="true">Настроить <IconArrow /></span>
         </div>
       </div>

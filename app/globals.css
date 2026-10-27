@@ -447,6 +447,12 @@ input[type="range"]:focus-visible{outline:2px solid var(--violet);outline-offset
 /* готовый код: тёмное окно — контрастный акцент на светлой странице */
 .fx-export .s-head{margin-bottom:clamp(28px,3.4vw,44px)}
 .fx-code{border:1px solid #1d1d28;border-radius:var(--r-l);background:#0c0c14;color:#c8c8d0;overflow:hidden}
+.fx-tabs{display:flex;align-items:center;gap:4px;padding:10px 12px 0;border-bottom:1px solid rgba(255,255,255,.09);background:#15151f}
+.fx-tab{min-height:42px;padding:8px 16px;border-radius:var(--r-s) var(--r-s) 0 0;font-size:14px;color:#8d8d9b;border:1px solid transparent;border-bottom:0;margin-bottom:-1px;transition:color .25s,background .25s}
+.fx-tab:hover{color:#f4f4f6}
+.fx-tab[aria-selected="true"]{background:#0c0c14;color:#fff;border-color:rgba(255,255,255,.09)}
+.fx-tabs .fx-code-meta{margin-left:auto;font-family:var(--f-mono);font-size:11px;color:#6c6c7a;padding-bottom:6px}
+@media(max-width:560px){.fx-tabs .fx-code-meta{display:none}.fx-tab{padding:8px 12px;font-size:13px}}
 .fx-code-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.09);font-family:var(--f-mono);font-size:12px;color:#8d8d9b}
 .fx-code-cls b{font-weight:500;color:#b6a4ff}
 .fx-code-body{max-height:560px;margin:0;padding:20px;overflow:auto;font-family:var(--f-mono);font-size:12.5px;line-height:1.7;color:#d6d6de;white-space:pre;scrollbar-width:thin;scrollbar-color:#3b3b48 transparent}

@@ -1,11 +1,26 @@
 {
   "categories": [
-    { "id": "text", "label": "Текст" },
-    { "id": "objects", "label": "Объекты" },
-    { "id": "interface", "label": "Интерфейс" },
-    { "id": "background", "label": "Фон" }
+    {
+      "id": "text",
+      "label": "Текст"
+    },
+    {
+      "id": "objects",
+      "label": "Объекты"
+    },
+    {
+      "id": "interface",
+      "label": "Интерфейс"
+    },
+    {
+      "id": "background",
+      "label": "Фон"
+    }
   ],
-  "subs": { "appear": "Появление", "hover": "Ховер" },
+  "subs": {
+    "appear": "Появление",
+    "hover": "Ховер"
+  },
   "triggers": {
     "load": "при загрузке",
     "view": "при появлении в экране",
@@ -14,396 +29,2866 @@
     "always": "постоянно"
   },
   "params": {
-    "trigger": { "label": "Запуск", "type": "select", "default": "view", "options": [
-      { "value": "load", "label": "При загрузке страницы" },
-      { "value": "view", "label": "При попадании в экран" },
-      { "value": "hover", "label": "По наведению" }
-    ] },
-    "repeat": { "label": "Повторять при каждом появлении в экране", "type": "toggle", "default": false, "when": { "trigger": "view" } },
-    "duration": { "label": "Длительность", "type": "range", "min": 100, "max": 3000, "step": 50, "default": 800, "unit": "мс", "cu": "ms", "m": true },
-    "delay": { "label": "Задержка старта", "type": "range", "min": 0, "max": 2000, "step": 50, "default": 0, "unit": "мс", "cu": "ms", "m": true },
-    "stagger": { "label": "Шаг между частями", "type": "range", "min": 0, "max": 300, "step": 5, "default": 40, "unit": "мс", "cu": "ms", "m": true },
-    "distance": { "label": "Смещение", "type": "range", "min": 0, "max": 200, "step": 2, "default": 40, "unit": "px", "cu": "px", "m": true },
-    "blur": { "label": "Размытие", "type": "range", "min": 0, "max": 40, "step": 1, "default": 12, "unit": "px", "cu": "px", "m": true },
-    "scale": { "label": "Начальный масштаб", "type": "range", "min": 0.3, "max": 1.5, "step": 0.01, "default": 0.9, "unit": "×", "cu": "", "m": true },
-    "rotate": { "label": "Наклон", "type": "range", "min": 0, "max": 30, "step": 1, "default": 6, "unit": "°", "cu": "deg" },
-    "angle": { "label": "Угол поворота", "type": "range", "min": -180, "max": 180, "step": 5, "default": -90, "unit": "°", "cu": "deg" },
-    "perspective": { "label": "Перспектива", "type": "range", "min": 200, "max": 2400, "step": 50, "default": 800, "unit": "px", "cu": "px" },
-    "ease": { "label": "Плавность (easing)", "type": "select", "default": "power3.out", "options": [
-      { "value": "ease", "label": "ease — стандартная" },
-      { "value": "power2.out", "label": "power2.out — мягкое замедление" },
-      { "value": "power3.out", "label": "power3.out — плавное замедление" },
-      { "value": "expo.out", "label": "expo.out — быстрый старт" },
-      { "value": "expo.inOut", "label": "expo.inOut — разгон и торможение" },
-      { "value": "back.out", "label": "back.out — с перелётом" },
-      { "value": "linear", "label": "linear — равномерно" },
-      { "value": "custom", "label": "Своя cubic-bezier" }
-    ] },
-    "bezier": { "label": "Значения cubic-bezier", "type": "text", "default": "0.16, 1, 0.3, 1", "placeholder": "x1, y1, x2, y2", "when": { "ease": "custom" } },
-    "dir": { "label": "Откуда появляется", "type": "seg", "default": "up", "options": [
-      { "value": "up", "label": "Снизу" },
-      { "value": "down", "label": "Сверху" },
-      { "value": "left", "label": "Справа" },
-      { "value": "right", "label": "Слева" }
-    ] },
-    "rise": { "label": "Откуда выезжает", "type": "seg", "default": "up", "options": [
-      { "value": "up", "label": "Снизу" },
-      { "value": "down", "label": "Сверху" }
-    ] },
-    "unit": { "label": "Дробление текста", "type": "seg", "default": "words", "options": [
-      { "value": "words", "label": "По словам" },
-      { "value": "chars", "label": "По буквам" }
-    ] },
-    "charset": { "label": "Символы перебора", "type": "select", "default": "latin", "options": [
-      { "value": "latin", "label": "Латиница A–Z" },
-      { "value": "cyrillic", "label": "Кириллица А–Я" },
-      { "value": "digits", "label": "Цифры 0–9" },
-      { "value": "symbols", "label": "Символы !<>/#" }
-    ] },
-    "noise": { "label": "Цвет перебора", "type": "color", "default": "#7c5cff" },
-    "color": { "label": "Цвет", "type": "color", "default": "#7c5cff" }
+    "trigger": {
+      "label": "Запуск",
+      "type": "select",
+      "default": "view",
+      "options": [
+        {
+          "value": "load",
+          "label": "При загрузке страницы"
+        },
+        {
+          "value": "view",
+          "label": "При попадании в экран"
+        },
+        {
+          "value": "hover",
+          "label": "По наведению"
+        }
+      ]
+    },
+    "repeat": {
+      "label": "Повторять при каждом появлении в экране",
+      "type": "toggle",
+      "default": false,
+      "when": {
+        "trigger": "view"
+      }
+    },
+    "duration": {
+      "label": "Длительность",
+      "type": "range",
+      "min": 100,
+      "max": 3000,
+      "step": 50,
+      "default": 800,
+      "unit": "мс",
+      "cu": "ms",
+      "m": true
+    },
+    "delay": {
+      "label": "Задержка старта",
+      "type": "range",
+      "min": 0,
+      "max": 2000,
+      "step": 50,
+      "default": 0,
+      "unit": "мс",
+      "cu": "ms",
+      "m": true
+    },
+    "stagger": {
+      "label": "Шаг между частями",
+      "type": "range",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "default": 40,
+      "unit": "мс",
+      "cu": "ms",
+      "m": true
+    },
+    "distance": {
+      "label": "Смещение",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 40,
+      "unit": "px",
+      "cu": "px",
+      "m": true
+    },
+    "blur": {
+      "label": "Размытие",
+      "type": "range",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "default": 12,
+      "unit": "px",
+      "cu": "px",
+      "m": true
+    },
+    "scale": {
+      "label": "Начальный масштаб",
+      "type": "range",
+      "min": 0.3,
+      "max": 1.5,
+      "step": 0.01,
+      "default": 0.9,
+      "unit": "×",
+      "cu": "",
+      "m": true
+    },
+    "rotate": {
+      "label": "Наклон",
+      "type": "range",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 6,
+      "unit": "°",
+      "cu": "deg"
+    },
+    "angle": {
+      "label": "Угол поворота",
+      "type": "range",
+      "min": -180,
+      "max": 180,
+      "step": 5,
+      "default": -90,
+      "unit": "°",
+      "cu": "deg"
+    },
+    "perspective": {
+      "label": "Перспектива",
+      "type": "range",
+      "min": 200,
+      "max": 2400,
+      "step": 50,
+      "default": 800,
+      "unit": "px",
+      "cu": "px"
+    },
+    "ease": {
+      "label": "Плавность (easing)",
+      "type": "select",
+      "default": "power3.out",
+      "options": [
+        {
+          "value": "ease",
+          "label": "ease — стандартная"
+        },
+        {
+          "value": "power2.out",
+          "label": "power2.out — мягкое замедление"
+        },
+        {
+          "value": "power3.out",
+          "label": "power3.out — плавное замедление"
+        },
+        {
+          "value": "expo.out",
+          "label": "expo.out — быстрый старт"
+        },
+        {
+          "value": "expo.inOut",
+          "label": "expo.inOut — разгон и торможение"
+        },
+        {
+          "value": "back.out",
+          "label": "back.out — с перелётом"
+        },
+        {
+          "value": "linear",
+          "label": "linear — равномерно"
+        },
+        {
+          "value": "custom",
+          "label": "Своя cubic-bezier"
+        }
+      ]
+    },
+    "bezier": {
+      "label": "Значения cubic-bezier",
+      "type": "text",
+      "default": "0.16, 1, 0.3, 1",
+      "placeholder": "x1, y1, x2, y2",
+      "when": {
+        "ease": "custom"
+      }
+    },
+    "dir": {
+      "label": "Откуда появляется",
+      "type": "seg",
+      "default": "up",
+      "options": [
+        {
+          "value": "up",
+          "label": "Снизу"
+        },
+        {
+          "value": "down",
+          "label": "Сверху"
+        },
+        {
+          "value": "left",
+          "label": "Справа"
+        },
+        {
+          "value": "right",
+          "label": "Слева"
+        }
+      ]
+    },
+    "rise": {
+      "label": "Откуда выезжает",
+      "type": "seg",
+      "default": "up",
+      "options": [
+        {
+          "value": "up",
+          "label": "Снизу"
+        },
+        {
+          "value": "down",
+          "label": "Сверху"
+        }
+      ]
+    },
+    "unit": {
+      "label": "Дробление текста",
+      "type": "seg",
+      "default": "words",
+      "options": [
+        {
+          "value": "words",
+          "label": "По словам"
+        },
+        {
+          "value": "chars",
+          "label": "По буквам"
+        }
+      ]
+    },
+    "charset": {
+      "label": "Символы перебора",
+      "type": "select",
+      "default": "latin",
+      "options": [
+        {
+          "value": "latin",
+          "label": "Латиница A–Z"
+        },
+        {
+          "value": "cyrillic",
+          "label": "Кириллица А–Я"
+        },
+        {
+          "value": "digits",
+          "label": "Цифры 0–9"
+        },
+        {
+          "value": "symbols",
+          "label": "Символы !<>/#"
+        }
+      ]
+    },
+    "noise": {
+      "label": "Цвет перебора",
+      "type": "color",
+      "default": "#7c5cff"
+    },
+    "color": {
+      "label": "Цвет",
+      "type": "color",
+      "default": "#7c5cff"
+    },
+    "gease": {
+      "label": "Плавность (GSAP ease)",
+      "type": "select",
+      "default": "power3.out",
+      "options": [
+        {
+          "value": "power2.out",
+          "label": "power2.out — мягкое замедление"
+        },
+        {
+          "value": "power3.out",
+          "label": "power3.out — плавное замедление"
+        },
+        {
+          "value": "expo.out",
+          "label": "expo.out — быстрый старт"
+        },
+        {
+          "value": "expo.inOut",
+          "label": "expo.inOut — разгон и торможение"
+        },
+        {
+          "value": "back.out",
+          "label": "back.out — с перелётом"
+        },
+        {
+          "value": "elastic.out",
+          "label": "elastic.out — пружина"
+        },
+        {
+          "value": "linear",
+          "label": "linear — равномерно"
+        }
+      ]
+    }
   },
   "effects": [
     {
-      "slug": "text-fade", "name": "Fade Reveal", "category": "text", "sub": "appear", "demo": "heading", "autoplay": "reload",
+      "slug": "text-fade",
+      "name": "Fade Reveal",
+      "category": "text",
+      "sub": "appear",
+      "demo": "heading",
+      "autoplay": "reload",
       "short": "Текст проявляется мягкой волной прозрачности: край градиента проходит по строкам в выбранную сторону.",
       "params": [
-        { "use": "trigger" }, { "use": "repeat" },
-        { "key": "sweep", "label": "Направление волны", "type": "seg", "default": "right", "options": [
-          { "value": "right", "label": "Слева направо" }, { "value": "left", "label": "Справа налево" },
-          { "value": "down", "label": "Сверху вниз" }, { "value": "up", "label": "Снизу вверх" }
-        ] },
-        { "key": "softness", "label": "Мягкость края", "type": "range", "min": 10, "max": 100, "step": 5, "default": 60, "unit": "%" },
-        { "use": "blur", "default": 4, "max": 20 },
-        { "use": "duration", "default": 1300 }, { "use": "delay" },
-        { "use": "ease", "default": "power2.out" }, { "use": "bezier" }
+        {
+          "use": "trigger"
+        },
+        {
+          "use": "repeat"
+        },
+        {
+          "key": "sweep",
+          "label": "Направление волны",
+          "type": "seg",
+          "default": "right",
+          "options": [
+            {
+              "value": "right",
+              "label": "Слева направо"
+            },
+            {
+              "value": "left",
+              "label": "Справа налево"
+            },
+            {
+              "value": "down",
+              "label": "Сверху вниз"
+            },
+            {
+              "value": "up",
+              "label": "Снизу вверх"
+            }
+          ]
+        },
+        {
+          "key": "softness",
+          "label": "Мягкость края",
+          "type": "range",
+          "min": 10,
+          "max": 100,
+          "step": 5,
+          "default": 60,
+          "unit": "%"
+        },
+        {
+          "use": "blur",
+          "default": 4,
+          "max": 20
+        },
+        {
+          "use": "duration",
+          "default": 1300
+        },
+        {
+          "use": "delay"
+        },
+        {
+          "use": "ease",
+          "default": "power2.out"
+        },
+        {
+          "use": "bezier"
+        }
       ],
       "presets": [
-        { "id": "wave", "label": "Волна", "values": {} },
-        { "id": "sharp", "label": "Чёткий край", "values": { "softness": 20, "blur": 0, "duration": 800 } },
-        { "id": "fog", "label": "Туман", "values": { "softness": 100, "blur": 12, "duration": 1800 } }
+        {
+          "id": "wave",
+          "label": "Волна",
+          "values": {}
+        },
+        {
+          "id": "sharp",
+          "label": "Чёткий край",
+          "values": {
+            "softness": 20,
+            "blur": 0,
+            "duration": 800
+          }
+        },
+        {
+          "id": "fog",
+          "label": "Туман",
+          "values": {
+            "softness": 100,
+            "blur": 12,
+            "duration": 1800
+          }
+        }
       ]
     },
     {
-      "slug": "text-blur", "name": "Blur Reveal", "category": "text", "sub": "appear", "demo": "heading", "autoplay": "reload",
+      "slug": "text-blur",
+      "name": "Blur Reveal",
+      "category": "text",
+      "sub": "appear",
+      "demo": "heading",
+      "autoplay": "reload",
       "short": "Слова или буквы выходят из размытия в резкость — по очереди, с лёгким каскадом.",
       "params": [
-        { "use": "trigger" }, { "use": "repeat" }, { "use": "unit" },
-        { "use": "blur", "default": 14 }, { "use": "distance", "default": 0, "max": 60 },
-        { "use": "duration", "default": 900 }, { "use": "stagger", "default": 45 }, { "use": "delay" },
-        { "use": "ease", "default": "power2.out" }, { "use": "bezier" }
+        {
+          "use": "trigger"
+        },
+        {
+          "use": "repeat"
+        },
+        {
+          "use": "unit"
+        },
+        {
+          "use": "blur",
+          "default": 14
+        },
+        {
+          "use": "distance",
+          "default": 0,
+          "max": 60
+        },
+        {
+          "use": "duration",
+          "default": 900
+        },
+        {
+          "use": "stagger",
+          "default": 45
+        },
+        {
+          "use": "delay"
+        },
+        {
+          "use": "ease",
+          "default": "power2.out"
+        },
+        {
+          "use": "bezier"
+        }
       ],
       "presets": [
-        { "id": "words", "label": "По словам", "values": {} },
-        { "id": "chars", "label": "По буквам", "values": { "unit": "chars", "stagger": 18, "blur": 10, "duration": 700 } },
-        { "id": "deep", "label": "Глубокий фокус", "values": { "blur": 30, "duration": 1400, "stagger": 70, "distance": 12 } }
+        {
+          "id": "words",
+          "label": "По словам",
+          "values": {}
+        },
+        {
+          "id": "chars",
+          "label": "По буквам",
+          "values": {
+            "unit": "chars",
+            "stagger": 18,
+            "blur": 10,
+            "duration": 700
+          }
+        },
+        {
+          "id": "deep",
+          "label": "Глубокий фокус",
+          "values": {
+            "blur": 30,
+            "duration": 1400,
+            "stagger": 70,
+            "distance": 12
+          }
+        }
       ]
     },
     {
-      "slug": "text-mask", "name": "Mask Reveal", "category": "text", "sub": "appear", "demo": "heading", "autoplay": "reload",
+      "slug": "text-mask",
+      "name": "Mask Reveal",
+      "category": "text",
+      "sub": "appear",
+      "demo": "heading",
+      "autoplay": "reload",
       "short": "Строки текста выезжают из-под невидимой маски одна за другой — классика редакционных сайтов.",
       "params": [
-        { "use": "trigger" }, { "use": "repeat" }, { "use": "rise" },
-        { "use": "rotate", "default": 4, "max": 15 },
-        { "use": "duration", "default": 950 }, { "use": "stagger", "label": "Шаг между строками", "default": 120 }, { "use": "delay" },
-        { "use": "ease", "default": "expo.out" }, { "use": "bezier" }
+        {
+          "use": "trigger"
+        },
+        {
+          "use": "repeat"
+        },
+        {
+          "use": "rise"
+        },
+        {
+          "use": "rotate",
+          "default": 4,
+          "max": 15
+        },
+        {
+          "use": "duration",
+          "default": 950
+        },
+        {
+          "use": "stagger",
+          "label": "Шаг между строками",
+          "default": 120
+        },
+        {
+          "use": "delay"
+        },
+        {
+          "use": "ease",
+          "default": "expo.out"
+        },
+        {
+          "use": "bezier"
+        }
       ],
       "presets": [
-        { "id": "lines", "label": "Строки", "values": {} },
-        { "id": "flat", "label": "Без наклона", "values": { "rotate": 0, "ease": "power3.out" } },
-        { "id": "slow", "label": "Неспешно", "values": { "duration": 1500, "stagger": 220 } }
+        {
+          "id": "lines",
+          "label": "Строки",
+          "values": {}
+        },
+        {
+          "id": "flat",
+          "label": "Без наклона",
+          "values": {
+            "rotate": 0,
+            "ease": "power3.out"
+          }
+        },
+        {
+          "id": "slow",
+          "label": "Неспешно",
+          "values": {
+            "duration": 1500,
+            "stagger": 220
+          }
+        }
       ]
     },
     {
-      "slug": "text-flip", "name": "3D Flip", "category": "text", "sub": "appear", "demo": "heading", "autoplay": "reload",
+      "slug": "text-flip",
+      "name": "3D Flip",
+      "category": "text",
+      "sub": "appear",
+      "demo": "heading",
+      "autoplay": "reload",
       "short": "Буквы или слова разворачиваются в пространстве вокруг горизонтальной оси, как табло.",
       "params": [
-        { "use": "trigger" }, { "use": "repeat" }, { "use": "unit", "default": "chars" },
-        { "use": "angle", "default": -90 }, { "use": "perspective", "default": 600 },
-        { "use": "duration", "default": 850 }, { "use": "stagger", "default": 28 }, { "use": "delay" },
-        { "use": "ease", "default": "back.out" }, { "use": "bezier" }
+        {
+          "use": "trigger"
+        },
+        {
+          "use": "repeat"
+        },
+        {
+          "use": "unit",
+          "default": "chars"
+        },
+        {
+          "use": "angle",
+          "default": -90
+        },
+        {
+          "use": "perspective",
+          "default": 600
+        },
+        {
+          "use": "duration",
+          "default": 850
+        },
+        {
+          "use": "stagger",
+          "default": 28
+        },
+        {
+          "use": "delay"
+        },
+        {
+          "use": "ease",
+          "default": "back.out"
+        },
+        {
+          "use": "bezier"
+        }
       ],
       "presets": [
-        { "id": "flip", "label": "Табло", "values": {} },
-        { "id": "words", "label": "По словам", "values": { "unit": "words", "stagger": 90 } },
-        { "id": "top", "label": "Сверху", "values": { "angle": 90, "ease": "power3.out" } }
+        {
+          "id": "flip",
+          "label": "Табло",
+          "values": {}
+        },
+        {
+          "id": "words",
+          "label": "По словам",
+          "values": {
+            "unit": "words",
+            "stagger": 90
+          }
+        },
+        {
+          "id": "top",
+          "label": "Сверху",
+          "values": {
+            "angle": 90,
+            "ease": "power3.out"
+          }
+        }
       ]
     },
     {
-      "slug": "text-scramble", "name": "Scramble", "category": "text", "sub": "appear", "demo": "heading", "autoplay": "reload",
+      "slug": "text-scramble",
+      "name": "Scramble",
+      "category": "text",
+      "sub": "appear",
+      "demo": "heading",
+      "autoplay": "reload",
       "short": "Буквы собираются из случайных символов слева направо — технологичный акцент для заголовков.",
       "params": [
-        { "use": "trigger" }, { "use": "repeat" }, { "use": "charset", "default": "symbols" },
-        { "use": "duration", "label": "Перебор одной буквы", "default": 600, "max": 2000 },
-        { "use": "stagger", "label": "Шаг между буквами", "default": 30, "max": 150 }, { "use": "delay" },
-        { "use": "noise" }
+        {
+          "use": "trigger"
+        },
+        {
+          "use": "repeat"
+        },
+        {
+          "use": "charset",
+          "default": "symbols"
+        },
+        {
+          "use": "duration",
+          "label": "Перебор одной буквы",
+          "default": 600,
+          "max": 2000
+        },
+        {
+          "use": "stagger",
+          "label": "Шаг между буквами",
+          "default": 30,
+          "max": 150
+        },
+        {
+          "use": "delay"
+        },
+        {
+          "use": "noise"
+        }
       ],
       "presets": [
-        { "id": "code", "label": "Код", "values": {} },
-        { "id": "fast", "label": "Быстро", "values": { "duration": 300, "stagger": 14 } },
-        { "id": "digits", "label": "Цифры", "values": { "charset": "digits", "noise": "#0c0c14" } }
+        {
+          "id": "code",
+          "label": "Код",
+          "values": {}
+        },
+        {
+          "id": "fast",
+          "label": "Быстро",
+          "values": {
+            "duration": 300,
+            "stagger": 14
+          }
+        },
+        {
+          "id": "digits",
+          "label": "Цифры",
+          "values": {
+            "charset": "digits",
+            "noise": "#0c0c14"
+          }
+        }
       ]
     },
     {
-      "slug": "text-split", "name": "Split Stagger", "category": "text", "sub": "appear", "demo": "heading", "autoplay": "reload",
+      "slug": "text-split",
+      "name": "Split Stagger",
+      "category": "text",
+      "sub": "appear",
+      "demo": "heading",
+      "autoplay": "reload",
       "short": "Текст делится на буквы или слова, и они поднимаются каскадом с лёгким наклоном.",
       "params": [
-        { "use": "trigger" }, { "use": "repeat" }, { "use": "unit", "default": "chars" }, { "use": "rise" },
-        { "use": "distance", "default": 40 }, { "use": "rotate", "default": 8 },
-        { "use": "duration", "default": 700 }, { "use": "stagger", "default": 22 }, { "use": "delay" },
-        { "use": "ease", "default": "power3.out" }, { "use": "bezier" }
+        {
+          "use": "trigger"
+        },
+        {
+          "use": "repeat"
+        },
+        {
+          "use": "unit",
+          "default": "chars"
+        },
+        {
+          "use": "rise"
+        },
+        {
+          "use": "distance",
+          "default": 40
+        },
+        {
+          "use": "rotate",
+          "default": 8
+        },
+        {
+          "use": "duration",
+          "default": 700
+        },
+        {
+          "use": "stagger",
+          "default": 22
+        },
+        {
+          "use": "delay"
+        },
+        {
+          "use": "ease",
+          "default": "power3.out"
+        },
+        {
+          "use": "bezier"
+        }
       ],
       "presets": [
-        { "id": "cascade", "label": "Каскад", "values": {} },
-        { "id": "words", "label": "По словам", "values": { "unit": "words", "stagger": 60, "rotate": 0 } },
-        { "id": "drop", "label": "Сверху", "values": { "rise": "down", "rotate": 12, "ease": "back.out" } }
+        {
+          "id": "cascade",
+          "label": "Каскад",
+          "values": {}
+        },
+        {
+          "id": "words",
+          "label": "По словам",
+          "values": {
+            "unit": "words",
+            "stagger": 60,
+            "rotate": 0
+          }
+        },
+        {
+          "id": "drop",
+          "label": "Сверху",
+          "values": {
+            "rise": "down",
+            "rotate": 12,
+            "ease": "back.out"
+          }
+        }
       ]
     },
     {
-      "slug": "text-hover-fill", "name": "Hover Fill", "category": "text", "sub": "hover", "trigger": "hover", "demo": "hoverText", "autoplay": "none",
+      "slug": "text-typewriter",
+      "name": "Typewriter",
+      "category": "text",
+      "sub": "appear",
+      "demo": "heading",
+      "autoplay": "reload",
+      "lib": "gsap",
+      "short": "Текст печатается буква за буквой, а в конце мигает курсор — как в терминале или мессенджере.",
+      "params": [
+        {
+          "use": "trigger"
+        },
+        {
+          "use": "repeat"
+        },
+        {
+          "key": "speed",
+          "label": "Скорость печати (на букву)",
+          "type": "range",
+          "min": 10,
+          "max": 200,
+          "step": 5,
+          "default": 45,
+          "unit": "мс",
+          "cu": "ms",
+          "m": true
+        },
+        {
+          "use": "delay"
+        },
+        {
+          "key": "caret",
+          "label": "Мигающий курсор",
+          "type": "toggle",
+          "default": true
+        },
+        {
+          "key": "caretColor",
+          "label": "Цвет курсора",
+          "type": "color",
+          "default": "#7c5cff",
+          "when": {
+            "caret": true
+          }
+        }
+      ],
+      "presets": [
+        {
+          "id": "type",
+          "label": "Печать",
+          "values": {}
+        },
+        {
+          "id": "fast",
+          "label": "Быстро",
+          "values": {
+            "speed": 20
+          }
+        },
+        {
+          "id": "slow",
+          "label": "Неспешно",
+          "values": {
+            "speed": 110,
+            "delay": 300
+          }
+        }
+      ]
+    },
+    {
+      "slug": "text-marker",
+      "name": "Marker Highlight",
+      "category": "text",
+      "sub": "appear",
+      "demo": "heading",
+      "autoplay": "reload",
+      "lib": "gsap",
+      "short": "Слова подчёркиваются маркером, который прорисовывается слева направо. Можно выделять только жирные слова.",
+      "params": [
+        {
+          "use": "trigger"
+        },
+        {
+          "use": "repeat"
+        },
+        {
+          "use": "color",
+          "label": "Цвет маркера",
+          "default": "#e4dcff"
+        },
+        {
+          "key": "thickness",
+          "label": "Высота маркера",
+          "type": "range",
+          "min": 15,
+          "max": 100,
+          "step": 5,
+          "default": 40,
+          "unit": "%",
+          "cu": "%"
+        },
+        {
+          "key": "onlyBold",
+          "label": "Только слова, выделенные жирным",
+          "type": "toggle",
+          "default": false
+        },
+        {
+          "use": "duration",
+          "default": 600,
+          "max": 2000
+        },
+        {
+          "use": "stagger",
+          "label": "Шаг между словами",
+          "default": 80
+        },
+        {
+          "use": "delay"
+        },
+        {
+          "use": "gease",
+          "default": "power3.out"
+        }
+      ],
+      "presets": [
+        {
+          "id": "marker",
+          "label": "Маркер",
+          "values": {}
+        },
+        {
+          "id": "line",
+          "label": "Тонкая линия",
+          "values": {
+            "thickness": 15,
+            "color": "#7c5cff"
+          }
+        },
+        {
+          "id": "full",
+          "label": "Сплошной фон",
+          "values": {
+            "thickness": 100,
+            "stagger": 40
+          }
+        }
+      ]
+    },
+    {
+      "slug": "text-counter",
+      "name": "Number Roll",
+      "category": "text",
+      "sub": "appear",
+      "demo": "stats",
+      "autoplay": "reload",
+      "lib": "gsap",
+      "short": "Числа в тексте «накручиваются» от нуля до своего значения — для статистики, цен и результатов.",
+      "params": [
+        {
+          "use": "trigger"
+        },
+        {
+          "use": "repeat"
+        },
+        {
+          "key": "from",
+          "label": "Начать с",
+          "type": "range",
+          "min": 0,
+          "max": 1000,
+          "step": 10,
+          "default": 0
+        },
+        {
+          "use": "duration",
+          "default": 1800,
+          "max": 5000
+        },
+        {
+          "use": "delay"
+        },
+        {
+          "key": "separator",
+          "label": "Пробелы между разрядами (12 000)",
+          "type": "toggle",
+          "default": true
+        },
+        {
+          "use": "gease",
+          "default": "expo.out"
+        }
+      ],
+      "presets": [
+        {
+          "id": "roll",
+          "label": "Накрутка",
+          "values": {}
+        },
+        {
+          "id": "long",
+          "label": "Долго",
+          "values": {
+            "duration": 3500,
+            "ease": "power2.out"
+          }
+        },
+        {
+          "id": "even",
+          "label": "Равномерно",
+          "values": {
+            "ease": "linear",
+            "duration": 1500
+          }
+        }
+      ]
+    },
+    {
+      "slug": "text-hover-fill",
+      "name": "Hover Fill",
+      "category": "text",
+      "sub": "hover",
+      "trigger": "hover",
+      "demo": "hoverText",
+      "autoplay": "none",
       "short": "При наведении текст заливается цветом или подчёркивается линией, которая пробегает по строке.",
       "params": [
-        { "key": "style", "label": "Стиль", "type": "seg", "default": "fill", "options": [
-          { "value": "fill", "label": "Заливка" }, { "value": "underline", "label": "Подчёркивание" }
-        ] },
-        { "use": "color", "label": "Цвет заливки / линии" },
-        { "key": "hdir", "label": "Направление", "type": "seg", "default": "right", "options": [
-          { "value": "right", "label": "Слева направо" }, { "value": "left", "label": "Справа налево" }
-        ] },
-        { "key": "thickness", "label": "Толщина линии", "type": "range", "min": 1, "max": 8, "step": 1, "default": 2, "unit": "px", "cu": "px", "when": { "style": "underline" } },
-        { "use": "duration", "default": 550, "max": 1500 },
-        { "use": "ease", "default": "power3.out" }, { "use": "bezier" }
+        {
+          "key": "style",
+          "label": "Стиль",
+          "type": "seg",
+          "default": "fill",
+          "options": [
+            {
+              "value": "fill",
+              "label": "Заливка"
+            },
+            {
+              "value": "underline",
+              "label": "Подчёркивание"
+            }
+          ]
+        },
+        {
+          "use": "color",
+          "label": "Цвет заливки / линии"
+        },
+        {
+          "key": "hdir",
+          "label": "Направление",
+          "type": "seg",
+          "default": "right",
+          "options": [
+            {
+              "value": "right",
+              "label": "Слева направо"
+            },
+            {
+              "value": "left",
+              "label": "Справа налево"
+            }
+          ]
+        },
+        {
+          "key": "thickness",
+          "label": "Толщина линии",
+          "type": "range",
+          "min": 1,
+          "max": 8,
+          "step": 1,
+          "default": 2,
+          "unit": "px",
+          "cu": "px",
+          "when": {
+            "style": "underline"
+          }
+        },
+        {
+          "use": "duration",
+          "default": 550,
+          "max": 1500
+        },
+        {
+          "use": "ease",
+          "default": "power3.out"
+        },
+        {
+          "use": "bezier"
+        }
       ],
       "presets": [
-        { "id": "fill", "label": "Заливка", "values": {} },
-        { "id": "line", "label": "Линия", "values": { "style": "underline" } },
-        { "id": "slow", "label": "Медленно", "values": { "duration": 1100, "ease": "expo.inOut" } }
+        {
+          "id": "fill",
+          "label": "Заливка",
+          "values": {}
+        },
+        {
+          "id": "line",
+          "label": "Линия",
+          "values": {
+            "style": "underline"
+          }
+        },
+        {
+          "id": "slow",
+          "label": "Медленно",
+          "values": {
+            "duration": 1100,
+            "ease": "expo.inOut"
+          }
+        }
       ]
     },
     {
-      "slug": "text-hover-scramble", "name": "Hover Scramble", "category": "text", "sub": "hover", "trigger": "hover", "demo": "hoverText", "autoplay": "enter",
+      "slug": "text-hover-scramble",
+      "name": "Hover Scramble",
+      "category": "text",
+      "sub": "hover",
+      "trigger": "hover",
+      "demo": "hoverText",
+      "autoplay": "enter",
       "short": "Наведите курсор — буквы на мгновение перемешиваются и собираются обратно в слово.",
       "params": [
-        { "use": "charset" },
-        { "use": "duration", "label": "Перебор одной буквы", "default": 380, "max": 1500 },
-        { "use": "stagger", "label": "Шаг между буквами", "default": 24, "max": 120 },
-        { "use": "noise" }
+        {
+          "use": "charset"
+        },
+        {
+          "use": "duration",
+          "label": "Перебор одной буквы",
+          "default": 380,
+          "max": 1500
+        },
+        {
+          "use": "stagger",
+          "label": "Шаг между буквами",
+          "default": 24,
+          "max": 120
+        },
+        {
+          "use": "noise"
+        }
       ],
       "presets": [
-        { "id": "classic", "label": "Классика", "values": {} },
-        { "id": "digits", "label": "Цифры", "values": { "charset": "digits" } },
-        { "id": "fast", "label": "Быстро", "values": { "duration": 200, "stagger": 10 } }
+        {
+          "id": "classic",
+          "label": "Классика",
+          "values": {}
+        },
+        {
+          "id": "digits",
+          "label": "Цифры",
+          "values": {
+            "charset": "digits"
+          }
+        },
+        {
+          "id": "fast",
+          "label": "Быстро",
+          "values": {
+            "duration": 200,
+            "stagger": 10
+          }
+        }
       ]
     },
     {
-      "slug": "fade-up", "name": "Fade Up", "category": "objects", "sub": "appear", "demo": "cards", "autoplay": "reload",
+      "slug": "text-hover-glitch",
+      "name": "Hover Glitch",
+      "category": "text",
+      "sub": "hover",
+      "trigger": "hover",
+      "demo": "hoverText",
+      "autoplay": "none",
+      "short": "При наведении текст «сбоит»: две цветные копии смещаются и дрожат. Работает только на transform.",
+      "params": [
+        {
+          "key": "color1",
+          "label": "Цвет копии 1",
+          "type": "color",
+          "default": "#7c5cff"
+        },
+        {
+          "key": "color2",
+          "label": "Цвет копии 2",
+          "type": "color",
+          "default": "#5fd394"
+        },
+        {
+          "key": "shift",
+          "label": "Сила сдвига",
+          "type": "range",
+          "min": 1,
+          "max": 14,
+          "step": 1,
+          "default": 4,
+          "unit": "px",
+          "cu": "px"
+        },
+        {
+          "use": "duration",
+          "label": "Период дрожания",
+          "default": 450,
+          "min": 150,
+          "max": 1500
+        }
+      ],
+      "presets": [
+        {
+          "id": "glitch",
+          "label": "Глитч",
+          "values": {}
+        },
+        {
+          "id": "soft",
+          "label": "Мягко",
+          "values": {
+            "shift": 2,
+            "duration": 800
+          }
+        },
+        {
+          "id": "hard",
+          "label": "Жёстко",
+          "values": {
+            "shift": 9,
+            "duration": 250,
+            "color2": "#ff5c8a"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "fade-up",
+      "name": "Fade Up",
+      "category": "objects",
+      "sub": "appear",
+      "demo": "cards",
+      "autoplay": "reload",
       "short": "Кнопки, карточки и изображения проявляются из прозрачности со смещением с любой стороны.",
       "params": [
-        { "use": "trigger" }, { "use": "repeat" }, { "use": "dir" },
-        { "use": "distance", "default": 40 },
-        { "use": "duration", "default": 800 }, { "use": "delay" },
-        { "use": "ease", "default": "power3.out" }, { "use": "bezier" }
+        {
+          "use": "trigger"
+        },
+        {
+          "use": "repeat"
+        },
+        {
+          "use": "dir"
+        },
+        {
+          "use": "distance",
+          "default": 40
+        },
+        {
+          "use": "duration",
+          "default": 800
+        },
+        {
+          "use": "delay"
+        },
+        {
+          "use": "ease",
+          "default": "power3.out"
+        },
+        {
+          "use": "bezier"
+        }
       ],
       "presets": [
-        { "id": "up", "label": "Снизу", "values": {} },
-        { "id": "side", "label": "Сбоку", "values": { "dir": "right", "distance": 70 } },
-        { "id": "subtle", "label": "Едва заметно", "values": { "distance": 12, "duration": 1200 } }
+        {
+          "id": "up",
+          "label": "Снизу",
+          "values": {}
+        },
+        {
+          "id": "side",
+          "label": "Сбоку",
+          "values": {
+            "dir": "right",
+            "distance": 70
+          }
+        },
+        {
+          "id": "subtle",
+          "label": "Едва заметно",
+          "values": {
+            "distance": 12,
+            "duration": 1200
+          }
+        }
       ]
     },
     {
-      "slug": "blur-in", "name": "Blur In", "category": "objects", "sub": "appear", "demo": "cards", "autoplay": "reload",
+      "slug": "blur-in",
+      "name": "Blur In",
+      "category": "objects",
+      "sub": "appear",
+      "demo": "cards",
+      "autoplay": "reload",
       "short": "Объект выплывает из размытия и чуть уменьшается до своего размера — мягкий фокус.",
       "params": [
-        { "use": "trigger" }, { "use": "repeat" },
-        { "use": "blur", "default": 16 }, { "use": "scale", "default": 1.05, "min": 0.8, "max": 1.3 },
-        { "use": "duration", "default": 900 }, { "use": "delay" },
-        { "use": "ease", "default": "power2.out" }, { "use": "bezier" }
+        {
+          "use": "trigger"
+        },
+        {
+          "use": "repeat"
+        },
+        {
+          "use": "blur",
+          "default": 16
+        },
+        {
+          "use": "scale",
+          "default": 1.05,
+          "min": 0.8,
+          "max": 1.3
+        },
+        {
+          "use": "duration",
+          "default": 900
+        },
+        {
+          "use": "delay"
+        },
+        {
+          "use": "ease",
+          "default": "power2.out"
+        },
+        {
+          "use": "bezier"
+        }
       ],
       "presets": [
-        { "id": "focus", "label": "Фокус", "values": {} },
-        { "id": "strong", "label": "Сильный", "values": { "blur": 32, "scale": 1.12 } },
-        { "id": "blur", "label": "Только блюр", "values": { "scale": 1 } }
+        {
+          "id": "focus",
+          "label": "Фокус",
+          "values": {}
+        },
+        {
+          "id": "strong",
+          "label": "Сильный",
+          "values": {
+            "blur": 32,
+            "scale": 1.12
+          }
+        },
+        {
+          "id": "blur",
+          "label": "Только блюр",
+          "values": {
+            "scale": 1
+          }
+        }
       ]
     },
     {
-      "slug": "mask-wipe", "name": "Mask Wipe", "category": "objects", "sub": "appear", "demo": "cards", "autoplay": "reload",
+      "slug": "mask-wipe",
+      "name": "Mask Wipe",
+      "category": "objects",
+      "sub": "appear",
+      "demo": "cards",
+      "autoplay": "reload",
       "short": "Изображение раскрывается шторкой-маской, а само слегка «оседает» по масштабу.",
       "params": [
-        { "use": "trigger" }, { "use": "repeat" },
-        { "key": "wipe", "label": "Направление шторки", "type": "seg", "default": "right", "options": [
-          { "value": "right", "label": "Слева направо" }, { "value": "left", "label": "Справа налево" },
-          { "value": "up", "label": "Снизу вверх" }, { "value": "down", "label": "Сверху вниз" }
-        ] },
-        { "use": "scale", "label": "Масштаб в начале", "default": 1.08, "min": 1, "max": 1.3 },
-        { "key": "radius", "label": "Скругление маски", "type": "range", "min": 0, "max": 40, "step": 1, "default": 0, "unit": "px", "cu": "px" },
-        { "use": "duration", "default": 1100 }, { "use": "delay" },
-        { "use": "ease", "default": "expo.inOut" }, { "use": "bezier" }
+        {
+          "use": "trigger"
+        },
+        {
+          "use": "repeat"
+        },
+        {
+          "key": "wipe",
+          "label": "Направление шторки",
+          "type": "seg",
+          "default": "right",
+          "options": [
+            {
+              "value": "right",
+              "label": "Слева направо"
+            },
+            {
+              "value": "left",
+              "label": "Справа налево"
+            },
+            {
+              "value": "up",
+              "label": "Снизу вверх"
+            },
+            {
+              "value": "down",
+              "label": "Сверху вниз"
+            }
+          ]
+        },
+        {
+          "use": "scale",
+          "label": "Масштаб в начале",
+          "default": 1.08,
+          "min": 1,
+          "max": 1.3
+        },
+        {
+          "key": "radius",
+          "label": "Скругление маски",
+          "type": "range",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "default": 0,
+          "unit": "px",
+          "cu": "px"
+        },
+        {
+          "use": "duration",
+          "default": 1100
+        },
+        {
+          "use": "delay"
+        },
+        {
+          "use": "ease",
+          "default": "expo.inOut"
+        },
+        {
+          "use": "bezier"
+        }
       ],
       "presets": [
-        { "id": "curtain", "label": "Шторка", "values": {} },
-        { "id": "rise", "label": "Снизу вверх", "values": { "wipe": "up" } },
-        { "id": "round", "label": "Со скруглением", "values": { "radius": 24, "ease": "power3.out" } }
+        {
+          "id": "curtain",
+          "label": "Шторка",
+          "values": {}
+        },
+        {
+          "id": "rise",
+          "label": "Снизу вверх",
+          "values": {
+            "wipe": "up"
+          }
+        },
+        {
+          "id": "round",
+          "label": "Со скруглением",
+          "values": {
+            "radius": 24,
+            "ease": "power3.out"
+          }
+        }
       ]
     },
     {
-      "slug": "scale-in", "name": "Scale In", "category": "objects", "sub": "appear", "demo": "cards", "autoplay": "reload",
+      "slug": "scale-in",
+      "name": "Scale In",
+      "category": "objects",
+      "sub": "appear",
+      "demo": "cards",
+      "autoplay": "reload",
       "short": "Объект вырастает из меньшего масштаба с пружинкой в конце — хорошо для кнопок и иконок.",
       "params": [
-        { "use": "trigger" }, { "use": "repeat" },
-        { "use": "scale", "default": 0.8 },
-        { "key": "origin", "label": "Точка роста", "type": "select", "default": "center", "options": [
-          { "value": "center", "label": "Из центра" }, { "value": "top", "label": "Сверху" },
-          { "value": "bottom", "label": "Снизу" }, { "value": "left", "label": "Слева" }, { "value": "right", "label": "Справа" }
-        ] },
-        { "use": "distance", "default": 0, "max": 120 },
-        { "use": "duration", "default": 700 }, { "use": "delay" },
-        { "use": "ease", "default": "back.out" }, { "use": "bezier" }
+        {
+          "use": "trigger"
+        },
+        {
+          "use": "repeat"
+        },
+        {
+          "use": "scale",
+          "default": 0.8
+        },
+        {
+          "key": "origin",
+          "label": "Точка роста",
+          "type": "select",
+          "default": "center",
+          "options": [
+            {
+              "value": "center",
+              "label": "Из центра"
+            },
+            {
+              "value": "top",
+              "label": "Сверху"
+            },
+            {
+              "value": "bottom",
+              "label": "Снизу"
+            },
+            {
+              "value": "left",
+              "label": "Слева"
+            },
+            {
+              "value": "right",
+              "label": "Справа"
+            }
+          ]
+        },
+        {
+          "use": "distance",
+          "default": 0,
+          "max": 120
+        },
+        {
+          "use": "duration",
+          "default": 700
+        },
+        {
+          "use": "delay"
+        },
+        {
+          "use": "ease",
+          "default": "back.out"
+        },
+        {
+          "use": "bezier"
+        }
       ],
       "presets": [
-        { "id": "spring", "label": "Пружина", "values": {} },
-        { "id": "dot", "label": "Из точки", "values": { "scale": 0.4, "ease": "expo.out", "duration": 900 } },
-        { "id": "zoom", "label": "Наплыв", "values": { "scale": 1.15, "ease": "power3.out", "duration": 1000 } }
+        {
+          "id": "spring",
+          "label": "Пружина",
+          "values": {}
+        },
+        {
+          "id": "dot",
+          "label": "Из точки",
+          "values": {
+            "scale": 0.4,
+            "ease": "expo.out",
+            "duration": 900
+          }
+        },
+        {
+          "id": "zoom",
+          "label": "Наплыв",
+          "values": {
+            "scale": 1.15,
+            "ease": "power3.out",
+            "duration": 1000
+          }
+        }
       ]
     },
     {
-      "slug": "tilt-in", "name": "3D Tilt In", "category": "objects", "sub": "appear", "demo": "cards", "autoplay": "reload",
+      "slug": "tilt-in",
+      "name": "3D Tilt In",
+      "category": "objects",
+      "sub": "appear",
+      "demo": "cards",
+      "autoplay": "reload",
       "short": "Объект поднимается и разворачивается из наклона назад в плоскость — объём без 3D-графики.",
       "params": [
-        { "use": "trigger" }, { "use": "repeat" },
-        { "use": "angle", "label": "Наклон по оси X", "default": 35, "min": -90, "max": 90 },
-        { "use": "perspective", "default": 1200 },
-        { "use": "distance", "default": 60 },
-        { "use": "duration", "default": 1000 }, { "use": "delay" },
-        { "use": "ease", "default": "power3.out" }, { "use": "bezier" }
+        {
+          "use": "trigger"
+        },
+        {
+          "use": "repeat"
+        },
+        {
+          "use": "angle",
+          "label": "Наклон по оси X",
+          "default": 35,
+          "min": -90,
+          "max": 90
+        },
+        {
+          "use": "perspective",
+          "default": 1200
+        },
+        {
+          "use": "distance",
+          "default": 60
+        },
+        {
+          "use": "duration",
+          "default": 1000
+        },
+        {
+          "use": "delay"
+        },
+        {
+          "use": "ease",
+          "default": "power3.out"
+        },
+        {
+          "use": "bezier"
+        }
       ],
       "presets": [
-        { "id": "tilt", "label": "Наклон", "values": {} },
-        { "id": "deep", "label": "Глубоко", "values": { "angle": 70, "perspective": 800 } },
-        { "id": "soft", "label": "Плавно", "values": { "angle": 15, "duration": 1400, "distance": 30 } }
+        {
+          "id": "tilt",
+          "label": "Наклон",
+          "values": {}
+        },
+        {
+          "id": "deep",
+          "label": "Глубоко",
+          "values": {
+            "angle": 70,
+            "perspective": 800
+          }
+        },
+        {
+          "id": "soft",
+          "label": "Плавно",
+          "values": {
+            "angle": 15,
+            "duration": 1400,
+            "distance": 30
+          }
+        }
       ]
     },
     {
-      "slug": "hover-tilt", "name": "Hover Tilt", "category": "objects", "sub": "hover", "trigger": "hover", "demo": "card", "autoplay": "pointer",
+      "slug": "stagger-grid",
+      "name": "Stagger Grid",
+      "category": "objects",
+      "sub": "appear",
+      "demo": "grid",
+      "autoplay": "reload",
+      "lib": "gsap",
+      "short": "Карточки сетки появляются волной по мере прокрутки — через ScrollTrigger.batch, без отдельного триггера на каждую.",
+      "params": [
+        {
+          "use": "repeat",
+          "label": "Повторять при каждом появлении в экране",
+          "when": {}
+        },
+        {
+          "use": "distance",
+          "default": 40
+        },
+        {
+          "use": "scale",
+          "default": 0.94,
+          "min": 0.7,
+          "max": 1
+        },
+        {
+          "use": "duration",
+          "default": 800
+        },
+        {
+          "use": "stagger",
+          "label": "Шаг между карточками",
+          "default": 90
+        },
+        {
+          "use": "gease",
+          "default": "power3.out"
+        }
+      ],
+      "presets": [
+        {
+          "id": "wave",
+          "label": "Волна",
+          "values": {}
+        },
+        {
+          "id": "pop",
+          "label": "С перелётом",
+          "values": {
+            "ease": "back.out",
+            "scale": 0.85
+          }
+        },
+        {
+          "id": "calm",
+          "label": "Спокойно",
+          "values": {
+            "distance": 16,
+            "scale": 1,
+            "duration": 1200
+          }
+        }
+      ]
+    },
+    {
+      "slug": "hover-tilt",
+      "name": "Hover Tilt",
+      "category": "objects",
+      "sub": "hover",
+      "trigger": "hover",
+      "demo": "card",
+      "autoplay": "pointer",
       "short": "Карточка наклоняется вслед за курсором и ловит блик. На тач-устройствах отключается сама.",
       "params": [
-        { "use": "angle", "label": "Максимальный наклон", "default": 10, "min": 0, "max": 30, "step": 1 },
-        { "use": "scale", "label": "Увеличение", "default": 1.03, "min": 1, "max": 1.15 },
-        { "use": "perspective", "default": 1000 },
-        { "use": "duration", "label": "Инерция", "default": 400, "max": 1200 },
-        { "use": "ease", "default": "power3.out" }, { "use": "bezier" },
-        { "key": "glare", "label": "Блик", "type": "toggle", "default": true },
-        { "key": "glareStrength", "label": "Яркость блика", "type": "range", "min": 0.05, "max": 0.8, "step": 0.05, "default": 0.35, "cu": "", "when": { "glare": true } }
+        {
+          "use": "angle",
+          "label": "Максимальный наклон",
+          "default": 10,
+          "min": 0,
+          "max": 30,
+          "step": 1
+        },
+        {
+          "use": "scale",
+          "label": "Увеличение",
+          "default": 1.03,
+          "min": 1,
+          "max": 1.15
+        },
+        {
+          "use": "perspective",
+          "default": 1000
+        },
+        {
+          "use": "duration",
+          "label": "Инерция",
+          "default": 400,
+          "max": 1200
+        },
+        {
+          "use": "ease",
+          "default": "power3.out"
+        },
+        {
+          "use": "bezier"
+        },
+        {
+          "key": "glare",
+          "label": "Блик",
+          "type": "toggle",
+          "default": true
+        },
+        {
+          "key": "glareStrength",
+          "label": "Яркость блика",
+          "type": "range",
+          "min": 0.05,
+          "max": 0.8,
+          "step": 0.05,
+          "default": 0.35,
+          "cu": "",
+          "when": {
+            "glare": true
+          }
+        }
       ],
       "presets": [
-        { "id": "card", "label": "Карточка", "values": {} },
-        { "id": "strong", "label": "Сильно", "values": { "angle": 20, "scale": 1.06 } },
-        { "id": "calm", "label": "Без блика", "values": { "glare": false, "angle": 6 } }
+        {
+          "id": "card",
+          "label": "Карточка",
+          "values": {}
+        },
+        {
+          "id": "strong",
+          "label": "Сильно",
+          "values": {
+            "angle": 20,
+            "scale": 1.06
+          }
+        },
+        {
+          "id": "calm",
+          "label": "Без блика",
+          "values": {
+            "glare": false,
+            "angle": 6
+          }
+        }
       ]
     },
     {
-      "slug": "hover-zoom", "name": "Hover Zoom", "category": "objects", "sub": "hover", "trigger": "hover", "demo": "gallery", "autoplay": "none",
+      "slug": "hover-zoom",
+      "name": "Hover Zoom",
+      "category": "objects",
+      "sub": "hover",
+      "trigger": "hover",
+      "demo": "gallery",
+      "autoplay": "none",
       "short": "Изображение плавно приближается внутри своей рамки и мягко затемняется при наведении.",
       "params": [
-        { "use": "scale", "label": "Приближение", "default": 1.08, "min": 1, "max": 1.4 },
-        { "use": "duration", "default": 700, "max": 2000 },
-        { "use": "ease", "default": "power3.out" }, { "use": "bezier" },
-        { "key": "radius", "label": "Скругление рамки", "type": "range", "min": 0, "max": 40, "step": 1, "default": 12, "unit": "px", "cu": "px" },
-        { "key": "overlay", "label": "Затемнение", "type": "toggle", "default": true },
-        { "key": "overlayColor", "label": "Цвет затемнения", "type": "color", "default": "#0c0c14", "when": { "overlay": true } },
-        { "key": "overlayOpacity", "label": "Сила затемнения", "type": "range", "min": 0.05, "max": 0.8, "step": 0.05, "default": 0.25, "cu": "", "when": { "overlay": true } }
+        {
+          "use": "scale",
+          "label": "Приближение",
+          "default": 1.08,
+          "min": 1,
+          "max": 1.4
+        },
+        {
+          "use": "duration",
+          "default": 700,
+          "max": 2000
+        },
+        {
+          "use": "ease",
+          "default": "power3.out"
+        },
+        {
+          "use": "bezier"
+        },
+        {
+          "key": "radius",
+          "label": "Скругление рамки",
+          "type": "range",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "default": 12,
+          "unit": "px",
+          "cu": "px"
+        },
+        {
+          "key": "overlay",
+          "label": "Затемнение",
+          "type": "toggle",
+          "default": true
+        },
+        {
+          "key": "overlayColor",
+          "label": "Цвет затемнения",
+          "type": "color",
+          "default": "#0c0c14",
+          "when": {
+            "overlay": true
+          }
+        },
+        {
+          "key": "overlayOpacity",
+          "label": "Сила затемнения",
+          "type": "range",
+          "min": 0.05,
+          "max": 0.8,
+          "step": 0.05,
+          "default": 0.25,
+          "cu": "",
+          "when": {
+            "overlay": true
+          }
+        }
       ],
       "presets": [
-        { "id": "zoom", "label": "Зум", "values": {} },
-        { "id": "strong", "label": "Сильный", "values": { "scale": 1.2, "overlayOpacity": 0.4 } },
-        { "id": "clean", "label": "Без затемнения", "values": { "overlay": false } }
+        {
+          "id": "zoom",
+          "label": "Зум",
+          "values": {}
+        },
+        {
+          "id": "strong",
+          "label": "Сильный",
+          "values": {
+            "scale": 1.2,
+            "overlayOpacity": 0.4
+          }
+        },
+        {
+          "id": "clean",
+          "label": "Без затемнения",
+          "values": {
+            "overlay": false
+          }
+        }
       ]
     },
     {
-      "slug": "custom-cursor", "name": "Custom Cursor", "category": "interface", "trigger": "site", "scope": "site", "demo": "page", "autoplay": "pointer",
+      "slug": "magnetic-button",
+      "name": "Magnetic Button",
+      "category": "objects",
+      "sub": "hover",
+      "trigger": "hover",
+      "demo": "button",
+      "autoplay": "pointer",
+      "lib": "gsap",
+      "short": "Кнопка притягивается к курсору, когда он рядом, и плавно возвращается. На тач-экранах отключается.",
+      "params": [
+        {
+          "key": "strength",
+          "label": "Сила притяжения",
+          "type": "range",
+          "min": 0.1,
+          "max": 1,
+          "step": 0.05,
+          "default": 0.35,
+          "cu": ""
+        },
+        {
+          "key": "radius",
+          "label": "Зона притяжения вокруг кнопки",
+          "type": "range",
+          "min": 0,
+          "max": 160,
+          "step": 5,
+          "default": 60,
+          "unit": "px",
+          "cu": "px"
+        },
+        {
+          "use": "duration",
+          "label": "Инерция",
+          "default": 400,
+          "max": 1200
+        },
+        {
+          "key": "inner",
+          "label": "Текст сдвигается сильнее кнопки",
+          "type": "toggle",
+          "default": true
+        }
+      ],
+      "presets": [
+        {
+          "id": "soft",
+          "label": "Мягко",
+          "values": {}
+        },
+        {
+          "id": "strong",
+          "label": "Сильно",
+          "values": {
+            "strength": 0.7,
+            "radius": 100
+          }
+        },
+        {
+          "id": "heavy",
+          "label": "Тяжело",
+          "values": {
+            "duration": 900,
+            "strength": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "slug": "spotlight",
+      "name": "Spotlight",
+      "category": "objects",
+      "sub": "hover",
+      "trigger": "hover",
+      "demo": "cards",
+      "autoplay": "pointer",
+      "lib": "gsap",
+      "short": "За курсором по карточке плывёт мягкое световое пятно. Двигается только transform — без перерисовки фона.",
+      "params": [
+        {
+          "key": "size",
+          "label": "Размер пятна",
+          "type": "range",
+          "min": 100,
+          "max": 600,
+          "step": 10,
+          "default": 280,
+          "unit": "px",
+          "cu": "px"
+        },
+        {
+          "use": "color",
+          "label": "Цвет света"
+        },
+        {
+          "key": "intensity",
+          "label": "Яркость",
+          "type": "range",
+          "min": 0.1,
+          "max": 1,
+          "step": 0.05,
+          "default": 0.4,
+          "cu": ""
+        },
+        {
+          "use": "duration",
+          "label": "Инерция",
+          "default": 450,
+          "max": 1500
+        }
+      ],
+      "presets": [
+        {
+          "id": "violet",
+          "label": "Фиолетовый",
+          "values": {}
+        },
+        {
+          "id": "mint",
+          "label": "Мятный",
+          "values": {
+            "color": "#5fd394"
+          }
+        },
+        {
+          "id": "big",
+          "label": "Широкий",
+          "values": {
+            "size": 520,
+            "intensity": 0.3
+          }
+        }
+      ]
+    },
+    {
+      "slug": "border-draw",
+      "name": "Border Draw",
+      "category": "objects",
+      "sub": "hover",
+      "trigger": "hover",
+      "demo": "cards",
+      "autoplay": "none",
+      "short": "При наведении рамка прорисовывается по периметру карточки — по очереди или со всех сторон сразу.",
+      "params": [
+        {
+          "use": "color",
+          "label": "Цвет рамки"
+        },
+        {
+          "key": "thickness",
+          "label": "Толщина",
+          "type": "range",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "default": 2,
+          "unit": "px",
+          "cu": "px"
+        },
+        {
+          "key": "order",
+          "label": "Порядок",
+          "type": "seg",
+          "default": "seq",
+          "options": [
+            {
+              "value": "seq",
+              "label": "По очереди"
+            },
+            {
+              "value": "all",
+              "label": "Сразу"
+            }
+          ]
+        },
+        {
+          "use": "duration",
+          "default": 600,
+          "max": 2000
+        },
+        {
+          "use": "ease",
+          "default": "power3.out"
+        },
+        {
+          "use": "bezier"
+        }
+      ],
+      "presets": [
+        {
+          "id": "draw",
+          "label": "Обводка",
+          "values": {}
+        },
+        {
+          "id": "fast",
+          "label": "Сразу",
+          "values": {
+            "order": "all",
+            "duration": 350
+          }
+        },
+        {
+          "id": "bold",
+          "label": "Жирная",
+          "values": {
+            "thickness": 4,
+            "color": "#0c0c14"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "custom-cursor",
+      "name": "Custom Cursor",
+      "category": "interface",
+      "trigger": "site",
+      "scope": "site",
+      "demo": "page",
+      "autoplay": "pointer",
       "short": "Точка и кольцо вместо системного курсора: кольцо догоняет с задержкой и увеличивается над ссылками.",
       "params": [
-        { "key": "dot", "label": "Размер точки", "type": "range", "min": 4, "max": 20, "step": 1, "default": 8, "unit": "px", "cu": "px" },
-        { "key": "ring", "label": "Размер кольца", "type": "range", "min": 20, "max": 90, "step": 2, "default": 38, "unit": "px", "cu": "px" },
-        { "use": "color" },
-        { "key": "smoothing", "label": "Скорость кольца", "type": "range", "min": 0.05, "max": 0.6, "step": 0.01, "default": 0.16, "cu": "" },
-        { "key": "hoverScale", "label": "Увеличение над ссылками", "type": "range", "min": 1, "max": 3, "step": 0.1, "default": 1.8, "unit": "×", "cu": "" },
-        { "key": "hideNative", "label": "Скрыть системный курсор", "type": "toggle", "default": true },
-        { "key": "blend", "label": "Инверсия цвета (difference)", "type": "toggle", "default": false }
+        {
+          "key": "dot",
+          "label": "Размер точки",
+          "type": "range",
+          "min": 4,
+          "max": 20,
+          "step": 1,
+          "default": 8,
+          "unit": "px",
+          "cu": "px"
+        },
+        {
+          "key": "ring",
+          "label": "Размер кольца",
+          "type": "range",
+          "min": 20,
+          "max": 90,
+          "step": 2,
+          "default": 38,
+          "unit": "px",
+          "cu": "px"
+        },
+        {
+          "use": "color"
+        },
+        {
+          "key": "smoothing",
+          "label": "Скорость кольца",
+          "type": "range",
+          "min": 0.05,
+          "max": 0.6,
+          "step": 0.01,
+          "default": 0.16,
+          "cu": ""
+        },
+        {
+          "key": "hoverScale",
+          "label": "Увеличение над ссылками",
+          "type": "range",
+          "min": 1,
+          "max": 3,
+          "step": 0.1,
+          "default": 1.8,
+          "unit": "×",
+          "cu": ""
+        },
+        {
+          "key": "hideNative",
+          "label": "Скрыть системный курсор",
+          "type": "toggle",
+          "default": true
+        },
+        {
+          "key": "blend",
+          "label": "Инверсия цвета (difference)",
+          "type": "toggle",
+          "default": false
+        }
       ],
       "presets": [
-        { "id": "classic", "label": "Точка и кольцо", "values": {} },
-        { "id": "big", "label": "Крупное кольцо", "values": { "ring": 64, "hoverScale": 1.4, "smoothing": 0.1 } },
-        { "id": "invert", "label": "Инверсия", "values": { "blend": true, "color": "#ffffff" } }
+        {
+          "id": "classic",
+          "label": "Точка и кольцо",
+          "values": {}
+        },
+        {
+          "id": "big",
+          "label": "Крупное кольцо",
+          "values": {
+            "ring": 64,
+            "hoverScale": 1.4,
+            "smoothing": 0.1
+          }
+        },
+        {
+          "id": "invert",
+          "label": "Инверсия",
+          "values": {
+            "blend": true,
+            "color": "#ffffff"
+          }
+        }
       ]
     },
     {
-      "slug": "page-fade", "name": "Page Fade", "category": "interface", "trigger": "site", "scope": "site", "demo": "pages", "autoplay": "click",
+      "slug": "page-fade",
+      "name": "Page Fade",
+      "category": "interface",
+      "trigger": "site",
+      "scope": "site",
+      "demo": "pages",
+      "autoplay": "click",
       "short": "Переход между страницами без резкой смены: экран мягко закрывается цветом и открывает следующую страницу.",
       "params": [
-        { "use": "color", "label": "Цвет перехода", "default": "#ffffff" },
-        { "use": "duration", "default": 450, "min": 150, "max": 1500 },
-        { "use": "ease", "default": "power2.out" }, { "use": "bezier" }
+        {
+          "use": "color",
+          "label": "Цвет перехода",
+          "default": "#ffffff"
+        },
+        {
+          "use": "duration",
+          "default": 450,
+          "min": 150,
+          "max": 1500
+        },
+        {
+          "use": "ease",
+          "default": "power2.out"
+        },
+        {
+          "use": "bezier"
+        }
       ],
       "presets": [
-        { "id": "white", "label": "Белый", "values": {} },
-        { "id": "ink", "label": "Графит", "values": { "color": "#0c0c14" } },
-        { "id": "slow", "label": "Медленно", "values": { "duration": 900, "color": "#efeaff" } }
+        {
+          "id": "white",
+          "label": "Белый",
+          "values": {}
+        },
+        {
+          "id": "ink",
+          "label": "Графит",
+          "values": {
+            "color": "#0c0c14"
+          }
+        },
+        {
+          "id": "slow",
+          "label": "Медленно",
+          "values": {
+            "duration": 900,
+            "color": "#efeaff"
+          }
+        }
       ]
     },
     {
-      "slug": "preloader-minimal", "name": "Preloader — Minimal", "category": "interface", "trigger": "site", "scope": "site", "demo": "site", "autoplay": "reload",
+      "slug": "marquee",
+      "name": "Marquee",
+      "category": "interface",
+      "trigger": "always",
+      "demo": "marquee",
+      "autoplay": "none",
+      "lib": "gsap",
+      "short": "Бегущая строка без швов: текст повторяется сам, замедляется при наведении и стоит на паузе вне экрана.",
+      "params": [
+        {
+          "key": "speed",
+          "label": "Один круг",
+          "type": "range",
+          "min": 5,
+          "max": 60,
+          "step": 1,
+          "default": 18,
+          "unit": "с",
+          "cu": "s"
+        },
+        {
+          "key": "mdir",
+          "label": "Направление",
+          "type": "seg",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Влево"
+            },
+            {
+              "value": "right",
+              "label": "Вправо"
+            }
+          ]
+        },
+        {
+          "key": "gap",
+          "label": "Отступ между повторами",
+          "type": "range",
+          "min": 0,
+          "max": 200,
+          "step": 4,
+          "default": 48,
+          "unit": "px",
+          "cu": "px",
+          "m": true
+        },
+        {
+          "key": "slowHover",
+          "label": "Замедлять при наведении",
+          "type": "toggle",
+          "default": true
+        }
+      ],
+      "presets": [
+        {
+          "id": "calm",
+          "label": "Спокойно",
+          "values": {}
+        },
+        {
+          "id": "fast",
+          "label": "Быстро",
+          "values": {
+            "speed": 8
+          }
+        },
+        {
+          "id": "back",
+          "label": "Вправо",
+          "values": {
+            "mdir": "right"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "preloader-minimal",
+      "name": "Preloader — Minimal",
+      "category": "interface",
+      "trigger": "site",
+      "scope": "site",
+      "demo": "site",
+      "autoplay": "reload",
       "short": "Тонкая полоса загрузки с процентами. Исчезает сама, когда страница полностью загрузилась.",
       "params": [
-        { "key": "bg", "label": "Фон", "type": "color", "default": "#ffffff" },
-        { "key": "accent", "label": "Цвет полосы и цифр", "type": "color", "default": "#7c5cff" },
-        { "key": "barWidth", "label": "Длина полосы", "type": "range", "min": 80, "max": 400, "step": 10, "default": 180, "unit": "px", "cu": "px" },
-        { "key": "percent", "label": "Показывать проценты", "type": "toggle", "default": true },
-        { "key": "minTime", "label": "Минимальное время показа", "type": "range", "min": 0, "max": 4000, "step": 100, "default": 900, "unit": "мс" },
-        { "key": "fade", "label": "Длительность исчезновения", "type": "range", "min": 200, "max": 1500, "step": 50, "default": 600, "unit": "мс", "cu": "ms" }
+        {
+          "key": "bg",
+          "label": "Фон",
+          "type": "color",
+          "default": "#ffffff"
+        },
+        {
+          "key": "accent",
+          "label": "Цвет полосы и цифр",
+          "type": "color",
+          "default": "#7c5cff"
+        },
+        {
+          "key": "barWidth",
+          "label": "Длина полосы",
+          "type": "range",
+          "min": 80,
+          "max": 400,
+          "step": 10,
+          "default": 180,
+          "unit": "px",
+          "cu": "px"
+        },
+        {
+          "key": "percent",
+          "label": "Показывать проценты",
+          "type": "toggle",
+          "default": true
+        },
+        {
+          "key": "minTime",
+          "label": "Минимальное время показа",
+          "type": "range",
+          "min": 0,
+          "max": 4000,
+          "step": 100,
+          "default": 900,
+          "unit": "мс"
+        },
+        {
+          "key": "fade",
+          "label": "Длительность исчезновения",
+          "type": "range",
+          "min": 200,
+          "max": 1500,
+          "step": 50,
+          "default": 600,
+          "unit": "мс",
+          "cu": "ms"
+        }
       ],
       "presets": [
-        { "id": "light", "label": "Светлый", "values": {} },
-        { "id": "dark", "label": "Тёмный", "values": { "bg": "#0c0c14", "accent": "#b6a4ff" } },
-        { "id": "clean", "label": "Без цифр", "values": { "percent": false, "barWidth": 120 } }
+        {
+          "id": "light",
+          "label": "Светлый",
+          "values": {}
+        },
+        {
+          "id": "dark",
+          "label": "Тёмный",
+          "values": {
+            "bg": "#0c0c14",
+            "accent": "#b6a4ff"
+          }
+        },
+        {
+          "id": "clean",
+          "label": "Без цифр",
+          "values": {
+            "percent": false,
+            "barWidth": 120
+          }
+        }
       ]
     },
     {
-      "slug": "preloader-logo", "name": "Preloader — Logo Reveal", "category": "interface", "trigger": "site", "scope": "site", "demo": "site", "autoplay": "reload",
+      "slug": "preloader-logo",
+      "name": "Preloader — Logo Reveal",
+      "category": "interface",
+      "trigger": "site",
+      "scope": "site",
+      "demo": "site",
+      "autoplay": "reload",
       "short": "Буквы логотипа выезжают по очереди, а затем экран загрузки уходит вверх шторкой или растворяется.",
       "params": [
-        { "key": "text", "label": "Текст логотипа", "type": "text", "default": "Brand", "placeholder": "Название компании" },
-        { "key": "font", "label": "Шрифт (CSS font-family)", "type": "text", "default": "TildaSans, Arial, sans-serif", "placeholder": "Например: Manrope, sans-serif" },
-        { "key": "size", "label": "Размер текста", "type": "range", "min": 24, "max": 140, "step": 2, "default": 64, "unit": "px", "cu": "px", "m": true },
-        { "key": "bg", "label": "Фон", "type": "color", "default": "#0c0c14" },
-        { "use": "color", "label": "Цвет логотипа", "default": "#ffffff" },
-        { "use": "stagger", "label": "Шаг между буквами", "default": 60, "max": 200 },
-        { "use": "duration", "label": "Появление одной буквы", "default": 700, "max": 1500 },
-        { "key": "exit", "label": "Как исчезает", "type": "seg", "default": "slide", "options": [
-          { "value": "slide", "label": "Уезжает вверх" }, { "value": "fade", "label": "Растворяется" }
-        ] },
-        { "key": "minTime", "label": "Минимальное время показа", "type": "range", "min": 0, "max": 4000, "step": 100, "default": 1400, "unit": "мс" }
+        {
+          "key": "text",
+          "label": "Текст логотипа",
+          "type": "text",
+          "default": "Brand",
+          "placeholder": "Название компании"
+        },
+        {
+          "key": "font",
+          "label": "Шрифт (CSS font-family)",
+          "type": "text",
+          "default": "TildaSans, Arial, sans-serif",
+          "placeholder": "Например: Manrope, sans-serif"
+        },
+        {
+          "key": "size",
+          "label": "Размер текста",
+          "type": "range",
+          "min": 24,
+          "max": 140,
+          "step": 2,
+          "default": 64,
+          "unit": "px",
+          "cu": "px",
+          "m": true
+        },
+        {
+          "key": "bg",
+          "label": "Фон",
+          "type": "color",
+          "default": "#0c0c14"
+        },
+        {
+          "use": "color",
+          "label": "Цвет логотипа",
+          "default": "#ffffff"
+        },
+        {
+          "use": "stagger",
+          "label": "Шаг между буквами",
+          "default": 60,
+          "max": 200
+        },
+        {
+          "use": "duration",
+          "label": "Появление одной буквы",
+          "default": 700,
+          "max": 1500
+        },
+        {
+          "key": "exit",
+          "label": "Как исчезает",
+          "type": "seg",
+          "default": "slide",
+          "options": [
+            {
+              "value": "slide",
+              "label": "Уезжает вверх"
+            },
+            {
+              "value": "fade",
+              "label": "Растворяется"
+            }
+          ]
+        },
+        {
+          "key": "minTime",
+          "label": "Минимальное время показа",
+          "type": "range",
+          "min": 0,
+          "max": 4000,
+          "step": 100,
+          "default": 1400,
+          "unit": "мс"
+        }
       ],
       "presets": [
-        { "id": "dark", "label": "Тёмный", "values": {} },
-        { "id": "light", "label": "Светлый", "values": { "bg": "#ffffff", "color": "#0c0c14" } },
-        { "id": "violet", "label": "Фиолетовый", "values": { "bg": "#7c5cff", "exit": "fade" } }
+        {
+          "id": "dark",
+          "label": "Тёмный",
+          "values": {}
+        },
+        {
+          "id": "light",
+          "label": "Светлый",
+          "values": {
+            "bg": "#ffffff",
+            "color": "#0c0c14"
+          }
+        },
+        {
+          "id": "violet",
+          "label": "Фиолетовый",
+          "values": {
+            "bg": "#7c5cff",
+            "exit": "fade"
+          }
+        }
       ]
     },
     {
-      "slug": "gradient-bg", "name": "Animated Gradient", "category": "background", "trigger": "always", "demo": "block", "autoplay": "none",
-      "short": "Медленно перетекающий градиент из трёх цветов для фона блока или фигуры. Без видео и картинок.",
+      "slug": "preloader-counter",
+      "name": "Preloader — Counter",
+      "category": "interface",
+      "trigger": "site",
+      "scope": "site",
+      "demo": "site",
+      "autoplay": "reload",
+      "short": "Крупные проценты загрузки в углу экрана. Счёт идёт до 100, затем экран загрузки растворяется.",
       "params": [
-        { "key": "c1", "label": "Цвет 1", "type": "color", "default": "#7c5cff" },
-        { "key": "c2", "label": "Цвет 2", "type": "color", "default": "#e4dcff" },
-        { "key": "c3", "label": "Цвет 3", "type": "color", "default": "#8fd3ff" },
-        { "use": "angle", "label": "Угол градиента", "default": 120, "min": 0, "max": 360 },
-        { "key": "speed", "label": "Период цикла", "type": "range", "min": 2, "max": 30, "step": 1, "default": 10, "unit": "с", "cu": "s" },
-        { "key": "size", "label": "Размах движения", "type": "range", "min": 150, "max": 600, "step": 10, "default": 300, "unit": "%", "cu": "%" }
+        {
+          "key": "bg",
+          "label": "Фон",
+          "type": "color",
+          "default": "#0c0c14"
+        },
+        {
+          "use": "color",
+          "label": "Цвет цифр",
+          "default": "#ffffff"
+        },
+        {
+          "key": "size",
+          "label": "Размер цифр",
+          "type": "range",
+          "min": 40,
+          "max": 220,
+          "step": 4,
+          "default": 120,
+          "unit": "px",
+          "cu": "px",
+          "m": true
+        },
+        {
+          "key": "place",
+          "label": "Положение",
+          "type": "seg",
+          "default": "corner",
+          "options": [
+            {
+              "value": "corner",
+              "label": "В углу"
+            },
+            {
+              "value": "center",
+              "label": "По центру"
+            }
+          ]
+        },
+        {
+          "key": "minTime",
+          "label": "Минимальное время показа",
+          "type": "range",
+          "min": 0,
+          "max": 4000,
+          "step": 100,
+          "default": 1200,
+          "unit": "мс"
+        },
+        {
+          "key": "fade",
+          "label": "Длительность исчезновения",
+          "type": "range",
+          "min": 200,
+          "max": 1500,
+          "step": 50,
+          "default": 600,
+          "unit": "мс",
+          "cu": "ms"
+        }
       ],
       "presets": [
-        { "id": "lavender", "label": "Лаванда", "values": {} },
-        { "id": "sunset", "label": "Закат", "values": { "c1": "#ff8a65", "c2": "#ffd1dc", "c3": "#7c5cff" } },
-        { "id": "mono", "label": "Графит", "values": { "c1": "#0c0c14", "c2": "#5b5b67", "c3": "#f3f3f7", "speed": 16 } }
+        {
+          "id": "dark",
+          "label": "Тёмный",
+          "values": {}
+        },
+        {
+          "id": "light",
+          "label": "Светлый",
+          "values": {
+            "bg": "#ffffff",
+            "color": "#0c0c14"
+          }
+        },
+        {
+          "id": "center",
+          "label": "По центру",
+          "values": {
+            "place": "center",
+            "size": 96,
+            "bg": "#7c5cff"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "preloader-curtain",
+      "name": "Preloader — Curtain",
+      "category": "interface",
+      "trigger": "site",
+      "scope": "site",
+      "demo": "site",
+      "autoplay": "reload",
+      "short": "Экран загрузки из двух створок: после загрузки они разъезжаются и открывают сайт.",
+      "params": [
+        {
+          "key": "bg",
+          "label": "Цвет створок",
+          "type": "color",
+          "default": "#7c5cff"
+        },
+        {
+          "key": "text",
+          "label": "Текст по центру (можно пустым)",
+          "type": "text",
+          "default": "Brand",
+          "placeholder": "Название компании"
+        },
+        {
+          "use": "color",
+          "label": "Цвет текста",
+          "default": "#ffffff"
+        },
+        {
+          "key": "split",
+          "label": "Как разъезжаются",
+          "type": "seg",
+          "default": "vertical",
+          "options": [
+            {
+              "value": "vertical",
+              "label": "Вверх и вниз"
+            },
+            {
+              "value": "horizontal",
+              "label": "В стороны"
+            }
+          ]
+        },
+        {
+          "use": "duration",
+          "label": "Раскрытие",
+          "default": 900,
+          "min": 300,
+          "max": 2000
+        },
+        {
+          "key": "minTime",
+          "label": "Минимальное время показа",
+          "type": "range",
+          "min": 0,
+          "max": 4000,
+          "step": 100,
+          "default": 900,
+          "unit": "мс"
+        }
+      ],
+      "presets": [
+        {
+          "id": "violet",
+          "label": "Фиолетовый",
+          "values": {}
+        },
+        {
+          "id": "ink",
+          "label": "Графит",
+          "values": {
+            "bg": "#0c0c14"
+          }
+        },
+        {
+          "id": "side",
+          "label": "В стороны",
+          "values": {
+            "split": "horizontal"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "preloader-words",
+      "name": "Preloader — Word Cycle",
+      "category": "interface",
+      "trigger": "site",
+      "scope": "site",
+      "demo": "site",
+      "autoplay": "reload",
+      "short": "Пока сайт грузится, слова сменяют друг друга по центру экрана — например, приветствие на разных языках.",
+      "params": [
+        {
+          "key": "words",
+          "label": "Слова через запятую",
+          "type": "text",
+          "default": "Привет, Hello, Bonjour, Hola, Ciao",
+          "placeholder": "Слово 1, слово 2, слово 3"
+        },
+        {
+          "key": "interval",
+          "label": "Смена слова",
+          "type": "range",
+          "min": 120,
+          "max": 1200,
+          "step": 20,
+          "default": 260,
+          "unit": "мс"
+        },
+        {
+          "key": "bg",
+          "label": "Фон",
+          "type": "color",
+          "default": "#0c0c14"
+        },
+        {
+          "use": "color",
+          "label": "Цвет слов",
+          "default": "#ffffff"
+        },
+        {
+          "key": "size",
+          "label": "Размер текста",
+          "type": "range",
+          "min": 24,
+          "max": 120,
+          "step": 2,
+          "default": 56,
+          "unit": "px",
+          "cu": "px",
+          "m": true
+        },
+        {
+          "key": "minTime",
+          "label": "Минимальное время показа",
+          "type": "range",
+          "min": 0,
+          "max": 5000,
+          "step": 100,
+          "default": 1600,
+          "unit": "мс"
+        }
+      ],
+      "presets": [
+        {
+          "id": "hello",
+          "label": "Приветствие",
+          "values": {}
+        },
+        {
+          "id": "brand",
+          "label": "О бренде",
+          "values": {
+            "words": "Дизайн, Код, Движение, AW-Flow",
+            "interval": 380
+          }
+        },
+        {
+          "id": "light",
+          "label": "Светлый",
+          "values": {
+            "bg": "#ffffff",
+            "color": "#0c0c14"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "gradient-bg",
+      "name": "Animated Gradient",
+      "category": "background",
+      "trigger": "always",
+      "demo": "block",
+      "autoplay": "none",
+      "short": "Медленно перетекающий градиент из трёх цветов для фона блока или фигуры. Без видео и картинок.",
+      "params": [
+        {
+          "key": "c1",
+          "label": "Цвет 1",
+          "type": "color",
+          "default": "#7c5cff"
+        },
+        {
+          "key": "c2",
+          "label": "Цвет 2",
+          "type": "color",
+          "default": "#e4dcff"
+        },
+        {
+          "key": "c3",
+          "label": "Цвет 3",
+          "type": "color",
+          "default": "#8fd3ff"
+        },
+        {
+          "use": "angle",
+          "label": "Угол градиента",
+          "default": 120,
+          "min": 0,
+          "max": 360
+        },
+        {
+          "key": "speed",
+          "label": "Период цикла",
+          "type": "range",
+          "min": 2,
+          "max": 30,
+          "step": 1,
+          "default": 10,
+          "unit": "с",
+          "cu": "s"
+        },
+        {
+          "key": "size",
+          "label": "Размах движения",
+          "type": "range",
+          "min": 150,
+          "max": 600,
+          "step": 10,
+          "default": 300,
+          "unit": "%",
+          "cu": "%"
+        }
+      ],
+      "presets": [
+        {
+          "id": "lavender",
+          "label": "Лаванда",
+          "values": {}
+        },
+        {
+          "id": "sunset",
+          "label": "Закат",
+          "values": {
+            "c1": "#ff8a65",
+            "c2": "#ffd1dc",
+            "c3": "#7c5cff"
+          }
+        },
+        {
+          "id": "mono",
+          "label": "Графит",
+          "values": {
+            "c1": "#0c0c14",
+            "c2": "#5b5b67",
+            "c3": "#f3f3f7",
+            "speed": 16
+          }
+        }
+      ]
+    },
+    {
+      "slug": "floating-blobs",
+      "name": "Floating Blobs",
+      "category": "background",
+      "trigger": "always",
+      "demo": "block",
+      "autoplay": "none",
+      "short": "Мягкие цветные пятна медленно дрейфуют по фону блока. Только transform и градиенты — без тяжёлого blur.",
+      "params": [
+        {
+          "key": "count",
+          "label": "Количество",
+          "type": "range",
+          "min": 2,
+          "max": 6,
+          "step": 1,
+          "default": 4
+        },
+        {
+          "key": "c1",
+          "label": "Цвет 1",
+          "type": "color",
+          "default": "#7c5cff"
+        },
+        {
+          "key": "c2",
+          "label": "Цвет 2",
+          "type": "color",
+          "default": "#8fd3ff"
+        },
+        {
+          "key": "size",
+          "label": "Размер пятна",
+          "type": "range",
+          "min": 20,
+          "max": 80,
+          "step": 1,
+          "default": 46,
+          "unit": "%",
+          "cu": "%"
+        },
+        {
+          "key": "opacity",
+          "label": "Насыщенность",
+          "type": "range",
+          "min": 0.2,
+          "max": 1,
+          "step": 0.05,
+          "default": 0.7,
+          "cu": ""
+        },
+        {
+          "key": "speed",
+          "label": "Период движения",
+          "type": "range",
+          "min": 6,
+          "max": 30,
+          "step": 1,
+          "default": 14,
+          "unit": "с",
+          "cu": "s"
+        }
+      ],
+      "presets": [
+        {
+          "id": "calm",
+          "label": "Спокойно",
+          "values": {}
+        },
+        {
+          "id": "warm",
+          "label": "Тепло",
+          "values": {
+            "c1": "#ff8a65",
+            "c2": "#ffd1dc"
+          }
+        },
+        {
+          "id": "dense",
+          "label": "Насыщенно",
+          "values": {
+            "count": 6,
+            "opacity": 0.9,
+            "speed": 9
+          }
+        }
       ]
     }
   ]

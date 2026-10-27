@@ -8,10 +8,10 @@ import FxControls from './FxControls';
 import Heading from './Heading';
 import Reveal from './Reveal';
 import { fxDefaults, presetValues } from '@/lib/aw-flow';
-import { buildCode, classOf } from '@/lib/fx/code';
+import { buildCode, classOf, gsapScripts } from '@/lib/fx/code';
 import { copyText } from '@/lib/client';
 
-function ElementSteps({ fx, C }) {
+function ElementSteps({ fx, C, gsap }) {
   return (
     <ol className="fx-steps-list">
       <li>
@@ -19,7 +19,8 @@ function ElementSteps({ fx, C }) {
         выберите пункт добавления CSS-класса (Add CSS class name). Впишите <code>{C}</code> — без точки. Класс ставится на сам элемент, не на весь артборд.
       </li>
       <li><b>Добавьте HTML-блок.</b> На этой же странице добавьте блок T123 «HTML-код» (проще всего найти поиском в библиотеке блоков) или элемент HTML внутри Zero Block.</li>
-      <li><b>Вставьте код.</b> Скопируйте код целиком и вставьте в этот HTML-блок, сохраните и опубликуйте страницу.</li>
+      <li><b>Вставьте код.</b> Скопируйте код на вкладке «Для Tilda» целиком и вставьте в этот HTML-блок, сохраните и опубликуйте страницу.</li>
+      {gsap && <li><b>GSAP уже внутри.</b> Код сам подключает GSAP из CDN. Если на странице несколько эффектов AW-Flow на GSAP, строки подключения (&lt;script src=…gsap…&gt;) достаточно оставить в одном блоке — в остальных их можно удалить.</li>}
       <li><b>Меняете настройки?</b> Сначала удалите старый код этого эффекта, затем вставьте новый и снова опубликуйте страницу.</li>
       <li><b>Разные настройки — разные классы.</b> Для второго варианта на той же странице задайте в конструкторе другой класс, например <code>{C}-2</code>, и вставьте его код отдельно.</li>
     </ol>
@@ -59,9 +60,13 @@ export default function FxStudio({ fx }) {
     if (window.matchMedia('(max-width: 640px)').matches) setDevice('mobile');
   }, []);
 
-  const code = useMemo(() => buildCode(fx, values), [fx, values]);
+  const [tab, setTab] = useState('tilda');
+  /* два варианта одного и того же кода: для Tilda (его же проигрывает превью) и для сайта на коде */
+  const codes = useMemo(() => ({ tilda: buildCode(fx, values, 'tilda'), web: buildCode(fx, values, 'web') }), [fx, values]);
+  const code = codes[tab];
   const C = classOf(fx, values);
   const site = fx.scope === 'site';
+  const gsap = gsapScripts(code).length > 0;
   const size = useMemo(() => (new Blob([code]).size / 1024).toFixed(1).replace('.', ','), [code]);
 
   const onChange = (key, val) => setValues(v => ({ ...v, [key]: val }));
@@ -80,7 +85,7 @@ export default function FxStudio({ fx }) {
   const onReset = () => { setValues(defaults); setReplay(r => r + 1); };
   const onCopy = async () => {
     const ok = await copyText(code);
-    setCopied(ok ? 'Код скопирован — вставьте его в Tilda.' : 'Не получилось скопировать автоматически — выделите код и скопируйте вручную.');
+    setCopied(ok ? (tab === 'tilda' ? 'Код скопирован — вставьте его в Tilda.' : 'Код скопирован — вставьте его в проект.') : 'Не получилось скопировать автоматически — выделите код и скопируйте вручную.');
     setTimeout(() => setCopied(''), 3500);
   };
 
@@ -111,18 +116,38 @@ export default function FxStudio({ fx }) {
           <div className="s-head">
             <Heading className="h2" text="Готовый *код*" />
             <Reveal as="p" className="s-side">
-              Это тот же код, что сейчас работает в превью: значения подставлены из конструктора, внешние библиотеки не нужны.
+              Два варианта одного эффекта с текущими настройками конструктора: для Tilda и для сайта на коде.
+              {gsap ? ' GSAP подключается из CDN прямо в коде.' : ' Внешние библиотеки не нужны.'}
             </Reveal>
           </div>
           <div className="fx-code">
+            <div className="fx-tabs" role="tablist" aria-label="Вариант кода">
+              {[['tilda', 'Для Tilda'], ['web', 'Для сайта (код)']].map(([id, label]) => (
+                <button key={id} type="button" role="tab" id={`tab-${id}`} aria-selected={tab === id} aria-controls="code-panel"
+                  tabIndex={tab === id ? 0 : -1} className="fx-tab"
+                  onClick={() => setTab(id)}
+                  onKeyDown={e => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { const n = id === 'tilda' ? 'web' : 'tilda'; setTab(n); document.getElementById(`tab-${n}`)?.focus(); } }}>
+                  {label}
+                </button>
+              ))}
+              <span className="fx-code-meta">{size} КБ · {gsap ? 'HTML + CSS + GSAP' : 'HTML + CSS + JS'}</span>
+            </div>
             <div className="fx-code-bar">
               <span className="fx-code-cls">{site ? 'для всего сайта' : <>класс: <b>{C}</b></>}</span>
-              <span className="fx-code-meta">{size} КБ · HTML + CSS + JS</span>
+              <span className="fx-code-meta">
+                {tab === 'tilda'
+                  ? (site ? 'вставка в настройки сайта' : 'класс на элементе Zero Block + HTML-блок')
+                  : (site ? 'в <head> каждой страницы' : 'разметка + стили + скрипт')}
+              </span>
             </div>
-            <pre className="fx-code-body" tabIndex={0} aria-label="Код эффекта для вставки в Tilda" data-lenis-prevent=""><code>{code}</code></pre>
+            <pre className="fx-code-body" id="code-panel" role="tabpanel" aria-labelledby={`tab-${tab}`} tabIndex={0} data-lenis-prevent=""><code>{code}</code></pre>
             <div className="fx-code-foot">
               <button type="button" className="btn btn-primary btn-sm" onClick={onCopy}>Скопировать код</button>
-              <p className="fx-code-note" role="status">{copied || (site ? 'Вставляется один раз — в код всего сайта.' : 'Вставляется в HTML-блок на той же странице, где элемент с классом.')}</p>
+              <p className="fx-code-note" role="status">
+                {copied || (tab === 'tilda'
+                  ? (site ? 'Вставляется один раз — в код всего сайта. Инструкция ниже.' : 'Вставляется в HTML-блок на той же странице, где элемент с классом. Инструкция ниже.')
+                  : (site ? 'Вставьте в <head> страниц сайта — один раз.' : `Разметку — на страницу, стили — в <head> или CSS, ${gsap ? 'GSAP и скрипт' : 'скрипт'} — перед </body>.${gsap ? ' GSAP достаточно подключить один раз на страницу.' : ''}`))}
+              </p>
             </div>
           </div>
         </div>
@@ -139,7 +164,7 @@ export default function FxStudio({ fx }) {
             </p>
           </div>
           <Reveal className="fx-install-card">
-            {site ? <SiteSteps fx={fx} C={C} /> : <ElementSteps fx={fx} C={C} />}
+            {site ? <SiteSteps fx={fx} C={C} /> : <ElementSteps fx={fx} C={C} gsap={gsapScripts(codes.tilda).length > 0} />}
           </Reveal>
         </div>
       </section>

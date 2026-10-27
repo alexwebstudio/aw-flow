@@ -62,6 +62,7 @@ export default async function EffectPage({ params }) {
               <div><dt>Параметров</dt><dd>{fx.params.length}</dd></div>
               <div><dt>Телефоны</dt><dd>{hasMobile(fx) ? 'свои настройки' : fx.sub === 'hover' ? 'без ховера' : 'как на десктопе'}</dd></div>
               <div><dt>Код</dt><dd>{fx.scope === 'site' ? 'на весь сайт' : 'HTML-блок'}</dd></div>
+              <div><dt>Библиотеки</dt><dd>{fx.lib === 'gsap' ? 'GSAP 3.15 (CDN)' : 'без библиотек'}</dd></div>
             </Reveal>
           </div>
         </div>
